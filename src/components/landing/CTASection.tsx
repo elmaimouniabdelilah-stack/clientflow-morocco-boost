@@ -33,7 +33,7 @@ const CTASection = () => (
             </p>
             <Button
               size="lg"
-              className="bg-white text-primary hover:bg-white/90 rounded-full px-8 h-13 text-base font-bold shadow-xl"
+              className="bg-white text-primary hover:bg-white/90 rounded-full px-10 h-14 text-base font-bold shadow-xl"
               asChild
             >
               <Link to="/signup">
