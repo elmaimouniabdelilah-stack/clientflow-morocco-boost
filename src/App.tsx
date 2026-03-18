@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import ReviewFunnel from "./pages/ReviewFunnel";
 import ReviewsDashboard from "./pages/ReviewsDashboard";
 import ClientsPage from "./pages/ClientsPage";
+import AnalyticsPage from "./pages/AnalyticsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/reviews" element={<ReviewsDashboard />} />
           <Route path="/dashboard/clients" element={<ClientsPage />} />
+          <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
           <Route path="/review" element={<ReviewFunnel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
