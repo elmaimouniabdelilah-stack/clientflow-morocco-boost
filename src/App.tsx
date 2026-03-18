@@ -13,6 +13,7 @@ import ClientsPage from "./pages/ClientsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import BookingsPage from "./pages/BookingsPage";
 import PublicBooking from "./pages/PublicBooking";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
