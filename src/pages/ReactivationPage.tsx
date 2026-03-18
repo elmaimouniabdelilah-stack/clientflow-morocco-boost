@@ -242,6 +242,7 @@ const ReactivationPage = () => {
             <div className="w-28 text-center">مدة الغياب</div>
             <div className="w-28 text-center">الحالة</div>
             <div className="w-20 text-center">إجراء</div>
+          </div>
 
           {/* Rows */}
           {filteredCustomers.map((customer, i) => (
