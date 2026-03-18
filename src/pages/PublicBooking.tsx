@@ -29,6 +29,11 @@ const PublicBooking = () => {
   const [searchParams] = useSearchParams();
   const bizName = searchParams.get("biz") || "ClientFlow";
 
+  const services = getEnabledServices().map(s => ({
+    ...s,
+    duration: `${s.duration} دقيقة`,
+  }));
+
   const [step, setStep] = useState<Step>("service");
   const [selectedService, setSelectedService] = useState("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
