@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ReviewFunnel from "./pages/ReviewFunnel";
 import ReviewsDashboard from "./pages/ReviewsDashboard";
+import ClientsPage from "./pages/ClientsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
