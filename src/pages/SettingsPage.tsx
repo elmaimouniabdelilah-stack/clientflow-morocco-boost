@@ -1,13 +1,14 @@
 import { useState } from "react";
-import {
-  Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe,
-  Scissors, Utensils, Stethoscope, Briefcase, Sparkles, Heart, Coffee,
-  Dumbbell, Palette, Camera, Music, BookOpen, Car, Plane, ShoppingBag,
-  Smartphone, Tv, Headphones, Mic, Gamepad2, Flower2, Baby, Dog,
-  GraduationCap, Hammer, Lightbulb, PenTool, Printer, Shirt, UtensilsCrossed,
-  Gem, Crown, Flame, Zap, Star, Sun, Moon, CloudSun, Waves, TreePine,
-  type LucideIcon,
-} from "lucide-react";
+import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { toast } from "sonner";
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { iconLibrary, getIconComponent } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
