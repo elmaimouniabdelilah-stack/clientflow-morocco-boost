@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 20% 98%;
     --foreground: 220 20% 14%;
 
     --card: 0 0% 100%;
@@ -15,41 +15,43 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 20% 14%;
 
-    --primary: 174 62% 38%;
+    --primary: 217 89% 51%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 174 62% 32%;
+    --secondary: 36 100% 50%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 20% 96%;
+    --muted: 214 20% 95%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 174 62% 38%;
+    --accent: 142 53% 42%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 4 80% 56%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 174 62% 38%;
+    --border: 220 13% 90%;
+    --input: 220 13% 90%;
+    --ring: 217 89% 51%;
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 220 20% 14%;
-    --sidebar-primary: 174 62% 38%;
+    --sidebar-primary: 217 89% 51%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 174 62% 38% / 0.08;
-    --sidebar-accent-foreground: 174 62% 38%;
+    --sidebar-accent: 217 89% 51% / 0.08;
+    --sidebar-accent-foreground: 217 89% 51%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 174 62% 38%;
+    --sidebar-ring: 217 89% 51%;
 
-    --teal-dark: 174 62% 28%;
-    --teal-light: 174 40% 95%;
+    --google-blue: 217 89% 51%;
+    --google-red: 4 80% 56%;
+    --google-yellow: 36 100% 50%;
+    --google-green: 142 53% 42%;
 
-    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
-    --shadow-elevated: 0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+    --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+    --shadow-elevated: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
   }
 }
 
@@ -69,34 +71,38 @@
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(174 62% 38%), hsl(174 62% 28%));
+    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(217 89% 42%));
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(174 62% 38%), hsl(174 62% 28%));
+    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(217 70% 38%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  .gradient-google {
+    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(4 80% 56%), hsl(36 100% 50%), hsl(142 53% 42%));
+  }
+
   .glass {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.35);
   }
 
   .glass-strong {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
   .bg-teal-section {
-    background: linear-gradient(135deg, hsl(174 62% 38%), hsl(174 62% 28%));
+    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(217 89% 38%));
   }
 
   .bg-teal-light {
-    background: hsl(174 40% 95%);
+    background: hsl(217 40% 96%);
   }
 
   /* Safe area for native apps */
