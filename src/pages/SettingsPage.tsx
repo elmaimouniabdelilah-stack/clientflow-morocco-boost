@@ -255,6 +255,66 @@ const SettingsPage = () => {
           )}
         </div>
 
+        {/* Reactivation Settings */}
+        <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+          <div className="flex items-center gap-2 mb-5">
+            <UserCheck className="h-5 w-5 text-primary" />
+            <h2 className="text-lg font-semibold text-foreground">إعدادات استرجاع العملاء</h2>
+          </div>
+
+          <div className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <Label>نسبة خصم الاسترجاع (%)</Label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={reactivationDiscount}
+                    onChange={(e) => setReactivationDiscount(e.target.value)}
+                    className="w-24 text-center text-lg font-bold"
+                    dir="ltr"
+                  />
+                  <span className="text-sm text-muted-foreground">%</span>
+                </div>
+              </div>
+              <div>
+                <Label>مدة عدم النشاط (أيام)</Label>
+                <Select value={inactivityDays} onValueChange={setInactivityDays}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="7">7 أيام</SelectItem>
+                    <SelectItem value="15">15 يوم</SelectItem>
+                    <SelectItem value="30">30 يوم</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div>
+              <Label>رسالة التذكير</Label>
+              <Textarea
+                value={reactivationMessage}
+                onChange={(e) => setReactivationMessage(e.target.value)}
+                placeholder="اكتب رسالة التذكير... استخدم {discount} لإدراج نسبة الخصم"
+                rows={3}
+              />
+              <p className="text-[10px] text-muted-foreground mt-1">استخدم <code className="bg-muted px-1 rounded">{"{discount}"}</code> لإدراج نسبة الخصم تلقائيًا</p>
+            </div>
+
+            {/* Preview */}
+            <div className="rounded-xl border border-dashed border-primary/20 bg-primary/5 p-4 text-center">
+              <p className="text-[10px] text-muted-foreground mb-2">معاينة الرسالة</p>
+              <p className="text-sm text-foreground">
+                👋 {reactivationMessage.replace("{discount}", `${reactivationDiscount}%`)}
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Work Hours */}
         <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
           <div className="flex items-center gap-2 mb-5">
