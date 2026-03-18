@@ -36,6 +36,28 @@ const serviceCategories = [
   { id: "other", label: "أخرى" },
 ];
 
+const SortableServiceItem = ({ id, children }: { id: string; children: React.ReactNode }) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    position: "relative" as const,
+    zIndex: isDragging ? 50 : "auto" as const,
+  };
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} data-sortable-id={id}>
+      {children}
+    </div>
+  );
+};
+
+const DragHandle = () => (
+  <div className="flex-shrink-0 cursor-grab active:cursor-grabbing touch-none text-muted-foreground hover:text-foreground transition-colors">
+    <GripVertical className="h-5 w-5" />
+  </div>
+);
+
 const SettingsPage = () => {
   const [copied, setCopied] = useState<string | null>(null);
 
