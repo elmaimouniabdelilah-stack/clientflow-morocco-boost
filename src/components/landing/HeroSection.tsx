@@ -48,21 +48,21 @@ const HeroSection = () => (
           </p>
 
           {/* CTA */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               size="lg"
-              className="gradient-primary text-white rounded-full px-8 h-13 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
+              className="gradient-primary text-white rounded-full px-10 h-14 text-base font-semibold shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
               asChild
             >
               <Link to="/signup">
                 ابدأ تجربتك المجانية
-                <ArrowLeft className="mr-2 h-4 w-4" />
+                <ArrowLeft className="mr-2 h-5 w-5" />
               </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="rounded-full h-13 text-base border-border/60"
+              className="rounded-full px-10 h-14 text-base border-border/60"
               asChild
             >
               <a href="#steps">شاهد كيف يعمل ←</a>
