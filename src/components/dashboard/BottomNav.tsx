@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, Users, Star, Calendar, Settings, UserCheck,
+  LayoutDashboard, Users, Calendar, BarChart3, Settings, UserCheck, Star,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
