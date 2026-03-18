@@ -18,8 +18,8 @@ const BottomNav = () => {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden safe-area-bottom">
-      <div className="mx-3 mb-2 rounded-2xl border border-border/50 bg-card/80 backdrop-blur-xl shadow-lg">
-        <div className="flex items-center justify-around h-[60px] px-1">
+      <div className="mx-2 mb-2 rounded-2xl border border-border/50 bg-card/80 backdrop-blur-xl shadow-lg">
+        <div className="flex items-center justify-evenly h-[60px] px-0.5">
           {navItems.map((item) => {
             const active = location.pathname === item.url;
             return (
@@ -27,14 +27,14 @@ const BottomNav = () => {
                 key={item.url}
                 onClick={() => navigate(item.url)}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-1 w-14 h-12 rounded-xl transition-all",
+                  "flex flex-col items-center justify-center gap-1 flex-1 min-w-0 h-12 rounded-xl transition-all",
                   active
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground"
                 )}
               >
-                <item.icon className={cn("h-[20px] w-[20px]", active && "stroke-[2.5]")} />
-                <span className="text-[9px] font-semibold leading-none">{item.title}</span>
+                <item.icon className={cn("h-[20px] w-[20px] shrink-0", active && "stroke-[2.5]")} />
+                <span className="text-[9px] font-semibold leading-none truncate max-w-full px-0.5">{item.title}</span>
               </button>
             );
           })}
