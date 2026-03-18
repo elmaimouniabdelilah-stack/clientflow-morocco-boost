@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ReviewFunnel from "./pages/ReviewFunnel";
+import ClientFlow from "./pages/ClientFlow";
 import ReviewsDashboard from "./pages/ReviewsDashboard";
 import ClientsPage from "./pages/ClientsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/dashboard/bookings" element={<BookingsPage />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />
           <Route path="/review" element={<ReviewFunnel />} />
+          <Route path="/client-flow" element={<ClientFlow />} />
           <Route path="/book" element={<PublicBooking />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
