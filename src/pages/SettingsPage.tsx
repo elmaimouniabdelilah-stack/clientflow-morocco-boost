@@ -489,9 +489,6 @@ const SettingsPage = () => {
               </div>
             </SortableContext>
           </DndContext>
-              );
-            })}
-          </div>
         </div>
 
         <div className="flex justify-end pb-8">
