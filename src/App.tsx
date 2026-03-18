@@ -36,6 +36,7 @@ const App = () => (
           <Route path="/dashboard/bookings" element={<BookingsPage />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />
           <Route path="/review" element={<ReviewFunnel />} />
+          <Route path="/client-flow" element={<ClientFlow />} />
           <Route path="/book" element={<PublicBooking />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
