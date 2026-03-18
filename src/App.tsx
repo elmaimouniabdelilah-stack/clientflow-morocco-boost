@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ReviewFunnel from "./pages/ReviewFunnel";
+import ClientFlow from "./pages/ClientFlow";
 import ReviewsDashboard from "./pages/ReviewsDashboard";
 import ClientsPage from "./pages/ClientsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
