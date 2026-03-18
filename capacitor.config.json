@@ -1,0 +1,9 @@
+{
+  "appId": "app.lovable.7d2bec2cb0304d3eb6fd01413b651e00",
+  "appName": "clientflow-morocco-boost",
+  "webDir": "dist",
+  "server": {
+    "url": "https://7d2bec2c-b030-4d3e-b6fd-01413b651e00.lovableproject.com?forceHideBadge=true",
+    "cleartext": true
+  }
+}
