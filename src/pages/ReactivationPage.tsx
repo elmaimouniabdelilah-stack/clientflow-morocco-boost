@@ -52,7 +52,13 @@ const ReactivationPage = () => {
 
   const openWhatsApp = (phone: string) => {
     const msg = encodeURIComponent(`👋 ${reactivationMessage}`);
-    window.open(`https://wa.me/${formatPhone(phone)}?text=${msg}`, "_blank");
+    const formattedPhone = formatPhone(phone);
+    // Use web.whatsapp.com for desktop compatibility
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const url = isMobile
+      ? `https://wa.me/${formattedPhone}?text=${msg}`
+      : `https://web.whatsapp.com/send?phone=${formattedPhone}&text=${msg}`;
+    window.open(url, "_blank");
   };
 
   const handleBulkWhatsApp = async () => {
