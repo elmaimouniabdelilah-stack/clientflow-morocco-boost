@@ -275,6 +275,17 @@ const ReactivationPage = () => {
               <div className="w-28 flex justify-center">
                 {getStatusBadge(customer.status)}
               </div>
+              <div className="w-20 flex justify-center">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-[#25D366] hover:bg-[#25D366]/10"
+                  onClick={() => openWhatsApp(customer.phone)}
+                  title="إرسال عبر واتساب"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </Button>
+              </div>
             </motion.div>
           ))}
 
