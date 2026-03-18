@@ -12,6 +12,7 @@ import ReviewsDashboard from "./pages/ReviewsDashboard";
 import ClientsPage from "./pages/ClientsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import BookingsPage from "./pages/BookingsPage";
+import PublicBooking from "./pages/PublicBooking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
