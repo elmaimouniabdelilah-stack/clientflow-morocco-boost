@@ -122,14 +122,18 @@ const PublicBooking = () => {
                         selectedService === s.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"
                       }`}
                     >
-                      <div className="w-11 h-11 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
+                      <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
                         <IconComp className="h-5 w-5 text-primary-foreground" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="font-medium text-foreground">{s.name}</p>
                         <p className="text-xs text-muted-foreground">{s.duration}</p>
+                        {s.description && <p className="text-[11px] text-muted-foreground/70 mt-0.5 truncate">{s.description}</p>}
                       </div>
-                      <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+                      <div className="text-left flex-shrink-0">
+                        <p className="text-sm font-bold text-primary">{s.price} <span className="text-[10px] font-normal text-muted-foreground">درهم</span></p>
+                      </div>
+                      <ChevronLeft className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                     </button>
                   );
                 })}
