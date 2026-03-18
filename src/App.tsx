@@ -11,6 +11,7 @@ import ReviewFunnel from "./pages/ReviewFunnel";
 import ReviewsDashboard from "./pages/ReviewsDashboard";
 import ClientsPage from "./pages/ClientsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import BookingsPage from "./pages/BookingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
