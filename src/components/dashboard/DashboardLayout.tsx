@@ -13,11 +13,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => (
         <AppSidebar />
       </div>
       <div className="flex-1 flex flex-col">
-        <header className="h-14 flex items-center border-b border-border px-4">
+        <header className="h-14 flex items-center border-b border-border px-4 bg-card">
           <div className="hidden md:block">
             <SidebarTrigger />
           </div>
-          <span className="ml-3 text-sm font-semibold font-display gradient-text">ClientFlow</span>
+          <span className="ml-3 text-sm font-bold gradient-text">ClientFlow</span>
         </header>
         <main className="flex-1 p-4 md:p-6 bg-background overflow-auto pb-20 md:pb-6">
           {children}

@@ -14,18 +14,18 @@ const CTASection = () => (
       >
         <div className="flex gap-1 justify-center mb-6">
           {[1, 2, 3, 4, 5].map((i) => (
-            <Star key={i} className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+            <Star key={i} className="h-6 w-6 fill-star text-star" />
           ))}
         </div>
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
           ابدأ اليوم وحوّل كل زيارة إلى فرصة نمو
         </h2>
-        <p className="text-white/80 mb-8">
+        <p className="text-white/70 mb-8">
           تجربة مجانية لمدة 7 أيام. لا حاجة لبطاقة ائتمان.
         </p>
         <Button
           size="lg"
-          className="bg-white text-primary hover:bg-white/90 rounded-full px-8 h-12 text-base font-semibold"
+          className="gradient-primary text-white rounded-full px-8 h-12 text-base font-semibold shadow-lg"
           asChild
         >
           <Link to="/signup">ابدأ تجربتك المجانية <ArrowLeft className="mr-2 h-4 w-4" /></Link>
