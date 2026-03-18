@@ -36,6 +36,7 @@ const App = () => (
           <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
           <Route path="/dashboard/bookings" element={<BookingsPage />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />
+          <Route path="/dashboard/reactivation" element={<ReactivationPage />} />
           <Route path="/review" element={<ReviewFunnel />} />
           <Route path="/client-flow" element={<ClientFlow />} />
           <Route path="/book" element={<PublicBooking />} />
