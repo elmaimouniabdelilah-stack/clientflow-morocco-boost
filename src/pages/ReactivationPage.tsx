@@ -199,14 +199,23 @@ const ReactivationPage = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
+                className="flex gap-2"
               >
+                <Button
+                  onClick={handleBulkWhatsApp}
+                  className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+                >
+                  <MessageCircle className="ml-2 h-3.5 w-3.5" />
+                  واتساب ({selected.length})
+                </Button>
                 <Button
                   onClick={handleSendReminders}
                   disabled={sending}
-                  className="gradient-primary text-primary-foreground h-9 text-xs"
+                  variant="outline"
+                  className="h-9 text-xs"
                 >
                   <Send className="ml-2 h-3.5 w-3.5" />
-                  {sending ? "جاري الإرسال..." : `إرسال تذكير (${selected.length})`}
+                  {sending ? "جاري الإرسال..." : `تذكير (${selected.length})`}
                 </Button>
               </motion.div>
             )}
