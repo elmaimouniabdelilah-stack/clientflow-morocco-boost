@@ -209,7 +209,15 @@ const ReactivationPage = () => {
             </Select>
           </div>
 
-          <AnimatePresence>
+          <div className="flex gap-2 items-center">
+            <Button
+              onClick={handleSendToAll}
+              className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+            >
+              <Users className="ml-2 h-3.5 w-3.5" />
+              واتساب جماعي ({customers.filter((c) => c.status === "inactive").length})
+            </Button>
+
             {selected.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
