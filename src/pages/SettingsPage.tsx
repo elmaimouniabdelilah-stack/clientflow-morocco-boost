@@ -107,7 +107,7 @@ const SettingsPage = () => {
   };
 
   const removeService = (id: string) => {
-    setServices(services.filter((s) => s.id !== id));
+    setServices(prev => prev.filter((s) => s.id !== id));
   };
 
   const sensors = useSensors(

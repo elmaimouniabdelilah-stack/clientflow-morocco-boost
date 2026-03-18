@@ -20,9 +20,12 @@ const defaultServices: ServiceData[] = [
 export const loadServices = (): ServiceData[] => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) return JSON.parse(stored);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
   } catch {}
-  return defaultServices;
+  return [...defaultServices];
 };
 
 export const saveServices = (services: ServiceData[]) => {
