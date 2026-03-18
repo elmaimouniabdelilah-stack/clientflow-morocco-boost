@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe, QrCode } from "lucide-react";
+import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe, QrCode, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,6 +38,12 @@ const SettingsPage = () => {
   const [bizAddress, setBizAddress] = useState("شارع محمد الخامس، الدار البيضاء");
   const [bizDescription, setBizDescription] = useState("مطعم مغربي عصري يقدم أشهى الأطباق التقليدية والعصرية");
   const [googleUrl, setGoogleUrl] = useState("https://g.page/my-restaurant/review");
+
+  // Reward settings
+  const [rewardEnabled, setRewardEnabled] = useState(true);
+  const [rewardDiscount, setRewardDiscount] = useState("10");
+  const [rewardMessage, setRewardMessage] = useState("على حجزك القادم");
+  const [rewardNote, setRewardNote] = useState("أظهر هذه الشاشة عند زيارتك القادمة");
 
   const [workDays, setWorkDays] = useState<WorkDay[]>([
     { day: "الإثنين", enabled: true, from: "09:00", to: "18:00" },
@@ -91,7 +97,7 @@ const SettingsPage = () => {
   );
 
   const bookingLink = `${window.location.origin}/book?biz=${encodeURIComponent(bizName)}`;
-  const reviewLink = `${window.location.origin}/review?biz=${encodeURIComponent(bizName)}&google=${encodeURIComponent(googleUrl)}`;
+  const reviewLink = `${window.location.origin}/review?biz=${encodeURIComponent(bizName)}&google=${encodeURIComponent(googleUrl)}&discount=${encodeURIComponent(rewardEnabled ? rewardDiscount : "0")}&rewardMsg=${encodeURIComponent(rewardMessage)}&rewardNote=${encodeURIComponent(rewardNote)}`;
 
   return (
     <DashboardLayout>
@@ -178,6 +184,70 @@ const SettingsPage = () => {
               <QRGenerator />
             </div>
           </div>
+        </div>
+
+        {/* Reward Settings */}
+        <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
+              <Gift className="h-5 w-5 text-primary" />
+              <h2 className="text-lg font-semibold text-foreground">إعدادات المكافأة</h2>
+            </div>
+            <div className="flex items-center gap-2">
+              <Label htmlFor="reward-toggle" className="text-xs text-muted-foreground">تفعيل المكافأة</Label>
+              <Switch id="reward-toggle" checked={rewardEnabled} onCheckedChange={setRewardEnabled} />
+            </div>
+          </div>
+
+          {rewardEnabled && (
+            <div className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <Label>نسبة الخصم (%)</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="number"
+                      min="1"
+                      max="100"
+                      value={rewardDiscount}
+                      onChange={(e) => setRewardDiscount(e.target.value)}
+                      className="w-24 text-center text-lg font-bold"
+                      dir="ltr"
+                    />
+                    <span className="text-sm text-muted-foreground">%</span>
+                  </div>
+                </div>
+                <div>
+                  <Label>رسالة المكافأة</Label>
+                  <Input
+                    value={rewardMessage}
+                    onChange={(e) => setRewardMessage(e.target.value)}
+                    placeholder="مثال: على حجزك القادم"
+                  />
+                </div>
+              </div>
+              <div>
+                <Label>ملاحظة للعميل</Label>
+                <Input
+                  value={rewardNote}
+                  onChange={(e) => setRewardNote(e.target.value)}
+                  placeholder="مثال: أظهر هذه الشاشة عند زيارتك القادمة"
+                />
+              </div>
+
+              {/* Preview */}
+              <div className="rounded-xl border border-dashed border-accent/30 bg-accent/5 p-5 text-center">
+                <p className="text-[10px] text-muted-foreground mb-2">معاينة ما سيراه العميل</p>
+                <p className="text-xl mb-1">🎁</p>
+                <p className="text-sm font-bold text-foreground mb-1">هدية لك!</p>
+                <div className="inline-block gradient-primary rounded-lg px-4 py-1.5 mb-1">
+                  <p className="text-lg font-black text-primary-foreground">خصم {rewardDiscount}%</p>
+                </div>
+                <p className="text-xs text-foreground font-medium">{rewardMessage}</p>
+                <p className="text-[10px] text-muted-foreground mt-2">📱 {rewardNote}</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Work Hours */}
