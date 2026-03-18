@@ -13,6 +13,10 @@ const ReviewFunnel = () => {
   const [searchParams] = useSearchParams();
   const businessName = searchParams.get("biz") || "مشروعنا";
   const googleUrl = searchParams.get("google") || "https://g.page/review";
+  const discount = searchParams.get("discount") || "10";
+  const rewardMsg = searchParams.get("rewardMsg") || "على حجزك القادم";
+  const rewardNote = searchParams.get("rewardNote") || "أظهر هذه الشاشة عند زيارتك القادمة";
+  const showReward = discount !== "0";
 
   const [step, setStep] = useState<Step>("rating");
   const [rating, setRating] = useState(0);
