@@ -66,18 +66,18 @@
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(217 89% 42%));
+    background: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 53%));
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(217 70% 38%));
+    background: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 45%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-google {
-    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(4 80% 56%), hsl(36 100% 50%), hsl(142 53% 42%));
+    background: linear-gradient(135deg, hsl(38 92% 50%), hsl(25 95% 53%));
   }
 
   .glass {
@@ -93,11 +93,11 @@
   }
 
   .bg-teal-section {
-    background: linear-gradient(135deg, hsl(217 89% 51%), hsl(217 89% 38%));
+    background: linear-gradient(135deg, hsl(0 0% 8%), hsl(0 0% 12%));
   }
 
   .bg-teal-light {
-    background: hsl(217 40% 96%);
+    background: hsl(40 20% 96%);
   }
 
   /* Safe area for native apps */
