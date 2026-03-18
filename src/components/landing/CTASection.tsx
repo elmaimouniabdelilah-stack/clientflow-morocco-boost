@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
@@ -13,13 +13,13 @@ const CTASection = () => (
         className="text-center max-w-2xl mx-auto"
       >
         <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-4">
-          Ready to grow your business?
+          مستعد لتنمية مشروعك؟
         </h2>
         <p className="text-primary-foreground/80 mb-8">
-          Start your 7-day free trial. No credit card required. Cancel anytime.
+          ابدأ تجربتك المجانية لمدة 7 أيام. لا حاجة لبطاقة ائتمان. ألغِ في أي وقت.
         </p>
         <Button size="lg" variant="secondary" className="bg-card text-foreground hover:bg-card/90 h-12 px-8 text-base" asChild>
-          <Link to="/signup">Start Free Trial <ArrowRight className="ml-2 h-4 w-4" /></Link>
+          <Link to="/signup">ابدأ تجربتك المجانية <ArrowLeft className="mr-2 h-4 w-4" /></Link>
         </Button>
       </motion.div>
     </div>

@@ -8,15 +8,15 @@ const Navbar = () => (
         ClientFlow
       </Link>
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-        <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-        <a href="#" className="hover:text-foreground transition-colors">Pricing</a>
+        <a href="#features" className="hover:text-foreground transition-colors">المميزات</a>
+        <a href="#" className="hover:text-foreground transition-colors">الأسعار</a>
       </div>
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" asChild>
-          <Link to="/login">Log In</Link>
+          <Link to="/login">تسجيل الدخول</Link>
         </Button>
         <Button size="sm" className="gradient-primary text-primary-foreground" asChild>
-          <Link to="/signup">Get Started</Link>
+          <Link to="/signup">ابدأ الآن</Link>
         </Button>
       </div>
     </div>

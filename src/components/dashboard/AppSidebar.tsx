@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Clients", url: "/dashboard/clients", icon: Users },
-  { title: "Reviews", url: "/dashboard/reviews", icon: Star },
-  { title: "Bookings", url: "/dashboard/bookings", icon: Calendar },
-  { title: "Analytics", url: "/dashboard/analytics", icon: BarChart3 },
-  { title: "Settings", url: "/dashboard/settings", icon: Settings },
+  { title: "لوحة التحكم", url: "/dashboard", icon: LayoutDashboard },
+  { title: "العملاء", url: "/dashboard/clients", icon: Users },
+  { title: "التقييمات", url: "/dashboard/reviews", icon: Star },
+  { title: "الحجوزات", url: "/dashboard/bookings", icon: Calendar },
+  { title: "التحليلات", url: "/dashboard/analytics", icon: BarChart3 },
+  { title: "الإعدادات", url: "/dashboard/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
@@ -24,17 +24,17 @@ export function AppSidebar() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" side="right">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          <SidebarGroupLabel>القائمة</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url} end className="hover:bg-sidebar-accent/50" activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium">
-                      <item.icon className="mr-2 h-4 w-4" />
+                      <item.icon className="ml-2 h-4 w-4" />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
@@ -49,8 +49,8 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <a href="/" className="text-muted-foreground hover:text-foreground">
-                <LogOut className="mr-2 h-4 w-4" />
-                {!collapsed && <span>Log Out</span>}
+                <LogOut className="ml-2 h-4 w-4" />
+                {!collapsed && <span>تسجيل الخروج</span>}
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

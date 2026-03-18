@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { Users, Star, Calendar, MessageCircle, BarChart3, Shield } from "lucide-react";
 
 const features = [
-  { icon: Users, title: "Customer Management", desc: "Track every client with notes, history, and contact info in one place." },
-  { icon: Star, title: "Review Funnel", desc: "Smart links that route happy clients to Google Reviews and capture negative feedback privately." },
-  { icon: Calendar, title: "Booking System", desc: "Calendar-based scheduling with auto-confirmation and reminders." },
-  { icon: MessageCircle, title: "WhatsApp Integration", desc: "Send review requests and booking reminders directly via WhatsApp." },
-  { icon: BarChart3, title: "Analytics Dashboard", desc: "Track customer growth, review trends, and booking performance at a glance." },
-  { icon: Shield, title: "Admin Panel", desc: "Full control over users, activity monitoring, and business settings." },
+  { icon: Users, title: "إدارة العملاء", desc: "تتبّع كل عميل مع ملاحظاته وسجل تعاملاته ومعلومات الاتصال في مكان واحد." },
+  { icon: Star, title: "نظام التقييمات الذكي", desc: "روابط ذكية توجّه العملاء السعداء لـ Google Reviews وتحتفظ بالتعليقات السلبية داخليًا." },
+  { icon: Calendar, title: "نظام الحجوزات", desc: "تقويم لإدارة المواعيد مع تأكيد تلقائي وتذكيرات." },
+  { icon: MessageCircle, title: "تكامل واتساب", desc: "أرسل طلبات التقييم وتذكيرات الحجوزات مباشرة عبر واتساب." },
+  { icon: BarChart3, title: "لوحة التحليلات", desc: "تابع نمو العملاء، تطور التقييمات، وأداء الحجوزات بنظرة واحدة." },
+  { icon: Shield, title: "لوحة الإدارة", desc: "تحكم كامل في المستخدمين، مراقبة النشاط، وإعدادات المشروع." },
 ];
 
 const FeaturesSection = () => (
@@ -19,9 +19,9 @@ const FeaturesSection = () => (
         viewport={{ once: true }}
         className="text-center mb-14"
       >
-        <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Features</p>
+        <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">المميزات</p>
         <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-          Everything you need to <span className="gradient-text">grow</span>
+          كل ما تحتاجه لـ<span className="gradient-text">تنمية</span> مشروعك
         </h2>
       </motion.div>
 

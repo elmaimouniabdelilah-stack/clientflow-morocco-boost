@@ -1,24 +1,30 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import owner1 from "@/assets/testimonial-owner1.jpg";
+import owner2 from "@/assets/testimonial-owner2.jpg";
+import owner3 from "@/assets/testimonial-owner3.jpg";
 
 const testimonials = [
   {
-    name: "Youssef B.",
-    role: "Restaurant Owner, Casablanca",
-    text: "ClientFlow doubled our Google reviews in just 2 months. The review funnel is genius — negative feedback stays private!",
+    name: "يوسف ب.",
+    role: "صاحب مطعم، الدار البيضاء",
+    text: "ClientFlow ضاعف تقييماتنا على Google في شهرين فقط. نظام التقييمات الذكي عبقري — التعليقات السلبية تبقى خاصة!",
     rating: 5,
+    avatar: owner1,
   },
   {
-    name: "Fatima Z.",
-    role: "Salon Owner, Marrakech",
-    text: "I used to lose track of appointments daily. Now everything is organized, and my clients get automatic reminders.",
+    name: "فاطمة ز.",
+    role: "صاحبة صالون، مراكش",
+    text: "كنت أفقد تتبّع المواعيد يوميًا. الآن كل شيء منظم، وعملائي يتلقون تذكيرات تلقائية.",
     rating: 5,
+    avatar: owner2,
   },
   {
-    name: "Amine K.",
-    role: "Freelance Consultant, Rabat",
-    text: "The analytics dashboard shows me exactly where my business is growing. It's like having a business coach in my pocket.",
+    name: "أمين ك.",
+    role: "مستشار مستقل، الرباط",
+    text: "لوحة التحليلات تريني بالضبط أين ينمو مشروعي. كأن معي مدرب أعمال في جيبي.",
     rating: 5,
+    avatar: owner3,
   },
 ];
 
@@ -31,9 +37,9 @@ const TestimonialsSection = () => (
         viewport={{ once: true }}
         className="text-center mb-14"
       >
-        <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">Testimonials</p>
+        <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">آراء العملاء</p>
         <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-          Loved by businesses across Morocco
+          محبوب من المشاريع في جميع أنحاء المغرب
         </h2>
       </motion.div>
 
@@ -53,9 +59,12 @@ const TestimonialsSection = () => (
               ))}
             </div>
             <p className="text-sm text-foreground leading-relaxed mb-4">"{t.text}"</p>
-            <div>
-              <p className="text-sm font-semibold text-foreground">{t.name}</p>
-              <p className="text-xs text-muted-foreground">{t.role}</p>
+            <div className="flex items-center gap-3">
+              <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+              <div>
+                <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                <p className="text-xs text-muted-foreground">{t.role}</p>
+              </div>
             </div>
           </motion.div>
         ))}
