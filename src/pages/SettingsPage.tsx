@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { iconLibrary, getIconComponent } from "@/lib/icons";
 import QRGenerator from "@/components/dashboard/QRGenerator";
+import { type ServiceData, loadServices, saveServices } from "@/lib/services-store";
 
 
 interface WorkDay {
@@ -20,16 +21,7 @@ interface WorkDay {
   to: string;
 }
 
-interface Service {
-  id: string;
-  name: string;
-  duration: string;
-  price: string;
-  enabled: boolean;
-  iconId: string;
-  category: string;
-  description: string;
-}
+type Service = ServiceData;
 
 const serviceCategories = [
   { id: "beauty", label: "تجميل وعناية" },
