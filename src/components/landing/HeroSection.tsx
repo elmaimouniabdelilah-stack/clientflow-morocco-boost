@@ -1,77 +1,95 @@
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Users, Calendar, BarChart3 } from "lucide-react";
+import { ArrowLeft, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-restaurant.jpg";
 
 const HeroSection = () => (
-  <section className="relative overflow-hidden bg-card pt-20 pb-32">
-    <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl gradient-primary" />
-    <div className="absolute bottom-0 left-1/4 w-80 h-80 rounded-full opacity-10 blur-3xl gradient-primary" />
-    
-    <div className="container relative z-10 mx-auto px-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto text-center"
-      >
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary mb-6">
-          <Star className="h-3.5 w-3.5" />
-          مصمّم للمشاريع المغربية
-        </div>
-        
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight">
-          أدِر عملاءك،{" "}
-          <span className="gradient-text">عزّز تقييماتك</span>،{" "}
-          نمّي مشروعك
-        </h1>
-        
-        <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-          نظام متكامل للمطاعم، الصالونات، العيادات والمستقلين في المغرب.
-          اجمع التقييمات، أدِر الحجوزات، وتابع نمو مشروعك — بكل سهولة.
-        </p>
-        
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="gradient-primary text-primary-foreground px-8 h-12 text-base" asChild>
-            <Link to="/signup">ابدأ تجربتك المجانية <ArrowLeft className="mr-2 h-4 w-4" /></Link>
-          </Button>
-          <Button size="lg" variant="outline" className="h-12 text-base" asChild>
-            <a href="#features">اكتشف كيف يعمل</a>
-          </Button>
-        </div>
-      </motion.div>
+  <section className="relative overflow-hidden bg-teal-section pt-28 pb-20 min-h-[520px]">
+    {/* Decorative shapes */}
+    <div className="absolute top-10 left-10 w-20 h-20 rounded-full bg-white/5" />
+    <div className="absolute bottom-20 right-20 w-32 h-32 rounded-full bg-white/5" />
 
-      {/* Hero image with glassmorphism overlay */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        className="mt-16 max-w-4xl mx-auto"
-      >
-        <div className="relative rounded-2xl overflow-hidden shadow-[var(--shadow-elevated)]">
-          <img src={heroImage} alt="مطعم مغربي عصري" className="w-full h-64 sm:h-80 object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
-          <div className="absolute bottom-0 inset-x-0 p-6">
-            <div className="glass-strong rounded-xl p-4">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { icon: Users, label: "إجمالي العملاء", value: "1,247", color: "text-primary" },
-                  { icon: Star, label: "التقييمات", value: "892", color: "text-secondary" },
-                  { icon: Calendar, label: "الحجوزات", value: "156", color: "text-accent" },
-                  { icon: BarChart3, label: "النمو", value: "+23%", color: "text-accent" },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <stat.icon className={`h-4 w-4 ${stat.color} mx-auto mb-1`} />
-                    <p className="text-lg font-bold text-foreground">{stat.value}</p>
-                    <p className="text-[10px] text-muted-foreground">{stat.label}</p>
-                  </div>
-                ))}
+    <div className="container relative z-10 mx-auto px-4">
+      <div className="grid lg:grid-cols-2 gap-10 items-center">
+        {/* Text content */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center lg:text-right"
+        >
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+            حوّل رضا الزبناء إلى{" "}
+            <span className="text-yellow-300">تقييمات Google</span>{" "}
+            أكثر
+          </h1>
+
+          <p className="mt-5 text-base text-white/80 max-w-lg mx-auto lg:mx-0 lg:mr-0">
+            نظام ذكي يجمع تقييمات حقيقية من عملائك ويوجّههم مباشرة إلى Google — بسهولة وبدون تعقيد.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <Button
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90 rounded-full px-8 h-12 text-base font-semibold"
+              asChild
+            >
+              <Link to="/signup">ابدأ تجربتك المجانية <ArrowLeft className="mr-2 h-4 w-4" /></Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10 rounded-full h-12 text-base"
+              asChild
+            >
+              <a href="#steps">اكتشف كيف يعمل</a>
+            </Button>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-10 flex items-center justify-center lg:justify-start gap-8">
+            {[
+              { value: "+2,500", label: "مشروع نشط" },
+              { value: "+50K", label: "تقييم تم جمعه" },
+              { value: "94%", label: "نسبة الرضا" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-2xl font-bold text-white">{stat.value}</p>
+                <p className="text-xs text-white/60 mt-0.5">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Phone mockup */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex justify-center lg:justify-end"
+        >
+          <div className="relative w-64 h-[500px]">
+            <div className="absolute inset-0 bg-white/10 rounded-[2.5rem] border border-white/20 backdrop-blur-sm" />
+            <div className="absolute inset-3 bg-foreground rounded-[2rem] overflow-hidden flex flex-col items-center justify-center p-6">
+              <div className="w-full space-y-4">
+                <div className="flex gap-1 justify-center mb-2">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-white text-center text-sm">كيف كانت تجربتك؟</p>
+                <div className="space-y-2">
+                  {["ممتازة 😍", "جيدة 😊", "عادية 😐"].map((label) => (
+                    <div key={label} className="bg-white/10 rounded-xl py-3 px-4 text-center text-white/90 text-sm">
+                      {label}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   </section>
 );
