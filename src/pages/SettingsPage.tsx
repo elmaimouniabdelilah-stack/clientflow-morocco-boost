@@ -97,7 +97,7 @@ const SettingsPage = () => {
   );
 
   const bookingLink = `${window.location.origin}/book?biz=${encodeURIComponent(bizName)}`;
-  const reviewLink = `${window.location.origin}/review?biz=${encodeURIComponent(bizName)}&google=${encodeURIComponent(googleUrl)}`;
+  const reviewLink = `${window.location.origin}/review?biz=${encodeURIComponent(bizName)}&google=${encodeURIComponent(googleUrl)}&discount=${encodeURIComponent(rewardEnabled ? rewardDiscount : "0")}&rewardMsg=${encodeURIComponent(rewardMessage)}&rewardNote=${encodeURIComponent(rewardNote)}`;
 
   return (
     <DashboardLayout>
