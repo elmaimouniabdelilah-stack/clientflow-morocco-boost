@@ -16,11 +16,11 @@ const timeSlots = [
 ];
 
 const services = [
-  { id: "consultation", name: "استشارة", duration: "30 دقيقة", iconId: "briefcase" },
-  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", iconId: "scissors" },
-  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", iconId: "sparkles" },
-  { id: "treatment", name: "علاج", duration: "45 دقيقة", iconId: "heart" },
-  { id: "checkup", name: "فحص", duration: "30 دقيقة", iconId: "stethoscope" },
+  { id: "consultation", name: "استشارة", duration: "30 دقيقة", price: "100", iconId: "briefcase", description: "جلسة استشارية مع متخصص" },
+  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", price: "80", iconId: "scissors", description: "حلاقة شعر رجالية" },
+  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", price: "150", iconId: "sparkles", description: "تنظيف بشرة عميق" },
+  { id: "treatment", name: "علاج", duration: "45 دقيقة", price: "200", iconId: "heart", description: "جلسة علاج طبيعي" },
+  { id: "checkup", name: "فحص", duration: "30 دقيقة", price: "120", iconId: "stethoscope", description: "فحص طبي شامل" },
 ];
 
 // Simulate some taken slots
