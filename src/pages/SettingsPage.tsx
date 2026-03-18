@@ -92,7 +92,7 @@ const SettingsPage = () => {
   };
 
   const addService = () => {
-    setServices([...services, { id: Date.now().toString(), name: "", duration: "30", price: "", enabled: true, iconId: "sparkles" }]);
+    setServices([...services, { id: Date.now().toString(), name: "", duration: "30", price: "", enabled: true, iconId: "sparkles", category: "other", description: "" }]);
   };
 
   const removeService = (id: string) => {
