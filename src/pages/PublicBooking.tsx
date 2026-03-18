@@ -16,11 +16,11 @@ const timeSlots = [
 ];
 
 const services = [
-  { id: "consultation", name: "استشارة", duration: "30 دقيقة", icon: "💼" },
-  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", icon: "💇" },
-  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", icon: "✨" },
-  { id: "treatment", name: "علاج", duration: "45 دقيقة", icon: "💆" },
-  { id: "checkup", name: "فحص", duration: "30 دقيقة", icon: "🏥" },
+  { id: "consultation", name: "استشارة", duration: "30 دقيقة", iconId: "briefcase" },
+  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", iconId: "scissors" },
+  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", iconId: "sparkles" },
+  { id: "treatment", name: "علاج", duration: "45 دقيقة", iconId: "heart" },
+  { id: "checkup", name: "فحص", duration: "30 دقيقة", iconId: "stethoscope" },
 ];
 
 // Simulate some taken slots
