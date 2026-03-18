@@ -112,22 +112,27 @@ const PublicBooking = () => {
               <h2 className="text-lg font-semibold text-foreground mb-1">{stepTitle.service}</h2>
               <p className="text-xs text-muted-foreground mb-5">ما هي الخدمة التي تريدها؟</p>
               <div className="space-y-2">
-                {services.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => { setSelectedService(s.id); setStep("date"); }}
-                    className={`w-full flex items-center gap-4 rounded-xl border p-4 text-right transition-all duration-150 hover:shadow-[var(--shadow-card)] ${
-                      selectedService === s.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"
-                    }`}
-                  >
-                    <span className="text-2xl">{s.icon}</span>
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground">{s.name}</p>
-                      <p className="text-xs text-muted-foreground">{s.duration}</p>
-                    </div>
-                    <ChevronLeft className="h-4 w-4 text-muted-foreground" />
-                  </button>
-                ))}
+                {services.map((s) => {
+                  const IconComp = getIconComponent(s.iconId);
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => { setSelectedService(s.id); setStep("date"); }}
+                      className={`w-full flex items-center gap-4 rounded-xl border p-4 text-right transition-all duration-150 hover:shadow-[var(--shadow-card)] ${
+                        selectedService === s.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"
+                      }`}
+                    >
+                      <div className="w-11 h-11 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
+                        <IconComp className="h-5 w-5 text-primary-foreground" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-foreground">{s.name}</p>
+                        <p className="text-xs text-muted-foreground">{s.duration}</p>
+                      </div>
+                      <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+                    </button>
+                  );
+                })}
               </div>
             </motion.div>
           )}
