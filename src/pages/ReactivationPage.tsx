@@ -246,8 +246,7 @@ const ReactivationPage = () => {
               )}
             </AnimatePresence>
           </div>
-
-        {/* Customer List */}
+        </div>
         <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden">
           {/* Table Header */}
           <div className="flex items-center gap-3 p-3 border-b border-border bg-muted/50 text-[11px] font-medium text-muted-foreground">
