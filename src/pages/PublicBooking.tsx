@@ -3,6 +3,7 @@ import { format, addDays, isBefore, startOfDay, isToday } from "date-fns";
 import { ar } from "date-fns/locale";
 import { CalendarIcon, Clock, CheckCircle2, User, Phone, ChevronLeft, ChevronRight } from "lucide-react";
 import { getIconComponent } from "@/lib/icons";
+import { getEnabledServices } from "@/lib/services-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,14 +14,6 @@ const timeSlots = [
   "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
   "12:00", "12:30", "14:00", "14:30", "15:00", "15:30",
   "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
-];
-
-const services = [
-  { id: "consultation", name: "استشارة", duration: "30 دقيقة", price: "100", iconId: "briefcase", description: "جلسة استشارية مع متخصص" },
-  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", price: "80", iconId: "scissors", description: "حلاقة شعر رجالية" },
-  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", price: "150", iconId: "sparkles", description: "تنظيف بشرة عميق" },
-  { id: "treatment", name: "علاج", duration: "45 دقيقة", price: "200", iconId: "heart", description: "جلسة علاج طبيعي" },
-  { id: "checkup", name: "فحص", duration: "30 دقيقة", price: "120", iconId: "stethoscope", description: "فحص طبي شامل" },
 ];
 
 // Simulate some taken slots

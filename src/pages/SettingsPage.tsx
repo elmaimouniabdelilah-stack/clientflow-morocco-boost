@@ -86,6 +86,7 @@ const SettingsPage = () => {
   };
 
   const handleSave = () => {
+    saveServices(services);
     toast.success("تم حفظ الإعدادات بنجاح ✓");
   };
 
