@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe,
-  Scissors, Utensils, Stethoscope, Briefcase, Sparkles, Heart, Coffee,
-  Dumbbell, Palette, Camera, Music, BookOpen, Car, Plane, ShoppingBag,
-  Smartphone, Tv, Headphones, Mic, Gamepad2, Flower2, Baby, Dog,
-  GraduationCap, Hammer, Lightbulb, PenTool, Printer, Shirt, UtensilsCrossed,
-  Gem, Crown, Flame, Zap, Star, Sun, Moon, CloudSun, Waves, TreePine,
-  type LucideIcon,
-} from "lucide-react";
+import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,54 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { toast } from "sonner";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { iconLibrary, getIconComponent } from "@/lib/icons";
 
-// Icon library
-const iconLibrary: { id: string; icon: LucideIcon; label: string }[] = [
-  { id: "scissors", icon: Scissors, label: "مقص" },
-  { id: "utensils", icon: Utensils, label: "أدوات طعام" },
-  { id: "utensils-crossed", icon: UtensilsCrossed, label: "مطعم" },
-  { id: "coffee", icon: Coffee, label: "قهوة" },
-  { id: "stethoscope", icon: Stethoscope, label: "طب" },
-  { id: "heart", icon: Heart, label: "قلب" },
-  { id: "briefcase", icon: Briefcase, label: "عمل" },
-  { id: "sparkles", icon: Sparkles, label: "تجميل" },
-  { id: "gem", icon: Gem, label: "جوهرة" },
-  { id: "crown", icon: Crown, label: "تاج" },
-  { id: "palette", icon: Palette, label: "فن" },
-  { id: "pen-tool", icon: PenTool, label: "تصميم" },
-  { id: "camera", icon: Camera, label: "تصوير" },
-  { id: "music", icon: Music, label: "موسيقى" },
-  { id: "mic", icon: Mic, label: "ميكروفون" },
-  { id: "dumbbell", icon: Dumbbell, label: "رياضة" },
-  { id: "flame", icon: Flame, label: "نار" },
-  { id: "zap", icon: Zap, label: "طاقة" },
-  { id: "star", icon: Star, label: "نجمة" },
-  { id: "lightbulb", icon: Lightbulb, label: "فكرة" },
-  { id: "book-open", icon: BookOpen, label: "كتاب" },
-  { id: "graduation", icon: GraduationCap, label: "تعليم" },
-  { id: "car", icon: Car, label: "سيارة" },
-  { id: "plane", icon: Plane, label: "سفر" },
-  { id: "shopping-bag", icon: ShoppingBag, label: "تسوق" },
-  { id: "shirt", icon: Shirt, label: "ملابس" },
-  { id: "smartphone", icon: Smartphone, label: "هاتف" },
-  { id: "tv", icon: Tv, label: "شاشة" },
-  { id: "headphones", icon: Headphones, label: "سماعات" },
-  { id: "gamepad", icon: Gamepad2, label: "ألعاب" },
-  { id: "printer", icon: Printer, label: "طباعة" },
-  { id: "hammer", icon: Hammer, label: "صيانة" },
-  { id: "flower", icon: Flower2, label: "زهور" },
-  { id: "tree", icon: TreePine, label: "طبيعة" },
-  { id: "sun", icon: Sun, label: "شمس" },
-  { id: "moon", icon: Moon, label: "قمر" },
-  { id: "cloud-sun", icon: CloudSun, label: "طقس" },
-  { id: "waves", icon: Waves, label: "أمواج" },
-  { id: "baby", icon: Baby, label: "أطفال" },
-  { id: "dog", icon: Dog, label: "حيوانات" },
-];
-
-const getIconComponent = (iconId: string): LucideIcon => {
-  return iconLibrary.find((i) => i.id === iconId)?.icon || Sparkles;
-};
 
 interface WorkDay {
   day: string;

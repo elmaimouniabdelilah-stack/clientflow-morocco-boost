@@ -2,6 +2,7 @@ import { useState } from "react";
 import { format, addDays, isBefore, startOfDay, isToday } from "date-fns";
 import { ar } from "date-fns/locale";
 import { CalendarIcon, Clock, CheckCircle2, User, Phone, ChevronLeft, ChevronRight } from "lucide-react";
+import { getIconComponent } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,11 +16,11 @@ const timeSlots = [
 ];
 
 const services = [
-  { id: "consultation", name: "استشارة", duration: "30 دقيقة", icon: "💼" },
-  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", icon: "💇" },
-  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", icon: "✨" },
-  { id: "treatment", name: "علاج", duration: "45 دقيقة", icon: "💆" },
-  { id: "checkup", name: "فحص", duration: "30 دقيقة", icon: "🏥" },
+  { id: "consultation", name: "استشارة", duration: "30 دقيقة", iconId: "briefcase" },
+  { id: "haircut", name: "حلاقة", duration: "45 دقيقة", iconId: "scissors" },
+  { id: "cleaning", name: "تنظيف", duration: "60 دقيقة", iconId: "sparkles" },
+  { id: "treatment", name: "علاج", duration: "45 دقيقة", iconId: "heart" },
+  { id: "checkup", name: "فحص", duration: "30 دقيقة", iconId: "stethoscope" },
 ];
 
 // Simulate some taken slots
@@ -111,22 +112,27 @@ const PublicBooking = () => {
               <h2 className="text-lg font-semibold text-foreground mb-1">{stepTitle.service}</h2>
               <p className="text-xs text-muted-foreground mb-5">ما هي الخدمة التي تريدها؟</p>
               <div className="space-y-2">
-                {services.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => { setSelectedService(s.id); setStep("date"); }}
-                    className={`w-full flex items-center gap-4 rounded-xl border p-4 text-right transition-all duration-150 hover:shadow-[var(--shadow-card)] ${
-                      selectedService === s.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"
-                    }`}
-                  >
-                    <span className="text-2xl">{s.icon}</span>
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground">{s.name}</p>
-                      <p className="text-xs text-muted-foreground">{s.duration}</p>
-                    </div>
-                    <ChevronLeft className="h-4 w-4 text-muted-foreground" />
-                  </button>
-                ))}
+                {services.map((s) => {
+                  const IconComp = getIconComponent(s.iconId);
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => { setSelectedService(s.id); setStep("date"); }}
+                      className={`w-full flex items-center gap-4 rounded-xl border p-4 text-right transition-all duration-150 hover:shadow-[var(--shadow-card)] ${
+                        selectedService === s.id ? "border-primary bg-primary/5" : "border-border hover:border-primary/30"
+                      }`}
+                    >
+                      <div className="w-11 h-11 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
+                        <IconComp className="h-5 w-5 text-primary-foreground" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium text-foreground">{s.name}</p>
+                        <p className="text-xs text-muted-foreground">{s.duration}</p>
+                      </div>
+                      <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+                    </button>
+                  );
+                })}
               </div>
             </motion.div>
           )}
@@ -229,7 +235,7 @@ const PublicBooking = () => {
               {/* Summary */}
               <div className="rounded-lg bg-muted p-3 mb-5 text-sm space-y-1">
                 <p className="text-muted-foreground">
-                  <span className="font-medium text-foreground">{services.find(s => s.id === selectedService)?.icon} {services.find(s => s.id === selectedService)?.name}</span>
+                  <span className="font-medium text-foreground">{services.find(s => s.id === selectedService)?.name}</span>
                 </p>
                 <p className="text-muted-foreground">
                   📅 {selectedDate && format(selectedDate, "EEEE d MMMM", { locale: ar })} — <span dir="ltr">🕐 {selectedTime}</span>
