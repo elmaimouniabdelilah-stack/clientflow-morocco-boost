@@ -27,7 +27,19 @@ interface Service {
   price: string;
   enabled: boolean;
   iconId: string;
+  category: string;
+  description: string;
 }
+
+const serviceCategories = [
+  { id: "beauty", label: "تجميل وعناية" },
+  { id: "health", label: "صحة وطب" },
+  { id: "food", label: "مطاعم ومقاهي" },
+  { id: "consulting", label: "استشارات" },
+  { id: "education", label: "تعليم وتدريب" },
+  { id: "sports", label: "رياضة ولياقة" },
+  { id: "other", label: "أخرى" },
+];
 
 const SettingsPage = () => {
   const [copied, setCopied] = useState<string | null>(null);
