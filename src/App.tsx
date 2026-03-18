@@ -12,6 +12,7 @@ import ReviewsDashboard from "./pages/ReviewsDashboard";
 import ClientsPage from "./pages/ClientsPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import BookingsPage from "./pages/BookingsPage";
+import PublicBooking from "./pages/PublicBooking";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
           <Route path="/dashboard/bookings" element={<BookingsPage />} />
           <Route path="/review" element={<ReviewFunnel />} />
+          <Route path="/book" element={<PublicBooking />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
