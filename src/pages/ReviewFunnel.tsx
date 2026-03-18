@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Send, CheckCircle2, ExternalLink } from "lucide-react";
+import { Star, Send, CheckCircle2, ExternalLink, Copy, Check, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
 
-type Step = "rating" | "feedback" | "redirect" | "thanks";
+type Step = "rating" | "feedback" | "booster" | "thanks";
+
+const defaultTemplates = [
+  "خدمة ممتازة وتجربة احترافية. أنصح بها بشدة!",
+  "مكان رائع وفريق محترف. سأعود بالتأكيد!",
+  "تجربة مميزة من البداية للنهاية. شكرًا!",
+];
 
 const ReviewFunnel = () => {
   const [searchParams] = useSearchParams();
@@ -24,12 +31,14 @@ const ReviewFunnel = () => {
   const [feedbackText, setFeedbackText] = useState("");
   const [feedbackName, setFeedbackName] = useState("");
   const [feedbackPhone, setFeedbackPhone] = useState("");
+  const [reviewText, setReviewText] = useState(defaultTemplates[0]);
+  const [copied, setCopied] = useState(false);
 
   const handleRate = (value: number) => {
     setRating(value);
     setTimeout(() => {
       if (value >= 4) {
-        setStep("redirect");
+        setStep("booster");
       } else {
         setStep("feedback");
       }
@@ -38,9 +47,19 @@ const ReviewFunnel = () => {
 
   const handleSubmitFeedback = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Save to database when Cloud is enabled
     console.log("Feedback submitted:", { rating, feedbackText, feedbackName, feedbackPhone, businessName });
     setStep("thanks");
+  };
+
+  const handleCopyReview = async () => {
+    try {
+      await navigator.clipboard.writeText(reviewText);
+      setCopied(true);
+      toast.success("تم نسخ النص!");
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("لم يتم النسخ — انسخ النص يدويًا");
+    }
   };
 
   const handleGoToGoogle = () => {
@@ -158,38 +177,104 @@ const ReviewFunnel = () => {
             </motion.div>
           )}
 
-          {/* Step 2b: Redirect to Google (4-5 stars) */}
-          {step === "redirect" && (
+          {/* Step 2b: Review Booster (4-5 stars) */}
+          {step === "booster" && (
             <motion.div
-              key="redirect"
+              key="booster"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="rounded-2xl border border-border bg-card p-8 shadow-[var(--shadow-elevated)] text-center"
+              className="rounded-2xl border border-border bg-card shadow-[var(--shadow-elevated)] overflow-hidden"
             >
-              <div className="flex justify-center gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map((v) => (
-                  <Star key={v} className={`h-6 w-6 ${v <= rating ? "fill-primary text-primary" : "text-border"}`} />
-                ))}
+              {/* Thank you header */}
+              <div className="bg-primary/5 border-b border-primary/10 p-6 text-center">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+                  className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-3"
+                >
+                  <Heart className="h-7 w-7 text-primary fill-primary" />
+                </motion.div>
+                <h2 className="text-xl font-bold text-foreground">🙏 شكرًا على تقييمك!</h2>
+                <p className="text-sm text-muted-foreground mt-1.5">
+                  تقييمك يساعد الآخرين كثيرًا ❤️
+                </p>
+                <div className="flex justify-center gap-1 mt-3">
+                  {[1, 2, 3, 4, 5].map((v) => (
+                    <Star key={v} className={`h-5 w-5 ${v <= rating ? "fill-primary text-primary" : "text-border"}`} />
+                  ))}
+                </div>
               </div>
-              <h2 className="text-xl font-bold text-foreground mb-2">شكرًا لك! 🎉</h2>
-              <p className="text-sm text-muted-foreground mb-6">
-                سعداء أن تجربتك كانت رائعة! هل يمكنك مشاركة تقييمك على Google لمساعدة الآخرين؟
-              </p>
-              <Button
-                onClick={handleGoToGoogle}
-                size="lg"
-                className="w-full gradient-primary text-primary-foreground h-12"
-              >
-                <ExternalLink className="ml-2 h-4 w-4" />
-                تقييمنا على Google
-              </Button>
-              <button
-                onClick={() => setStep("thanks")}
-                className="mt-3 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              >
-                لا شكرًا، تخطي
-              </button>
+
+              {/* Review template */}
+              <div className="p-6 space-y-4">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-semibold text-muted-foreground">
+                      💡 اقتراح تقييم (اختياري — يمكنك تعديله)
+                    </p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleCopyReview}
+                      className="h-7 text-xs gap-1.5 text-muted-foreground hover:text-primary"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="h-3.5 w-3.5" />
+                          تم النسخ
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3.5 w-3.5" />
+                          نسخ
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                  <Textarea
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    rows={3}
+                    className="text-sm resize-none border-primary/20 focus:border-primary/40 bg-primary/[0.02]"
+                    placeholder="اكتب تقييمك هنا..."
+                  />
+                </div>
+
+                {/* Quick templates */}
+                <div className="flex gap-2 flex-wrap">
+                  {defaultTemplates.map((tpl, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setReviewText(tpl)}
+                      className={`text-[10px] px-3 py-1.5 rounded-full border transition-colors ${
+                        reviewText === tpl
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border text-muted-foreground hover:border-primary/30"
+                      }`}
+                    >
+                      نموذج {i + 1}
+                    </button>
+                  ))}
+                </div>
+
+                <Button
+                  onClick={handleGoToGoogle}
+                  size="lg"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 rounded-xl text-base font-semibold shadow-md"
+                >
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                  اكتب تقييمك على Google
+                </Button>
+
+                <button
+                  onClick={() => setStep("thanks")}
+                  className="w-full text-center text-xs text-muted-foreground hover:text-foreground transition-colors py-1"
+                >
+                  لا شكرًا، تخطي
+                </button>
+              </div>
             </motion.div>
           )}
 
@@ -206,7 +291,7 @@ const ReviewFunnel = () => {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-                  className="rounded-xl border-2 border-accent/30 bg-accent/5 p-6 mb-6"
+                  className="rounded-xl border-2 border-primary/20 bg-primary/5 p-6 mb-6"
                 >
                   <p className="text-3xl mb-3">🎁</p>
                   <p className="text-base font-bold text-foreground mb-2">هدية لك!</p>
@@ -214,14 +299,14 @@ const ReviewFunnel = () => {
                     <p className="text-2xl font-black text-primary-foreground">خصم {discount}%</p>
                   </div>
                   <p className="text-sm text-foreground font-medium mt-1">{rewardMsg}</p>
-                  <p className="text-[11px] text-muted-foreground mt-3 border-t border-accent/10 pt-3">
+                  <p className="text-[11px] text-muted-foreground mt-3 border-t border-primary/10 pt-3">
                     📱 {rewardNote}
                   </p>
                 </motion.div>
               )}
 
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 mb-3">
-                <CheckCircle2 className="h-6 w-6 text-accent" />
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-3">
+                <CheckCircle2 className="h-6 w-6 text-primary" />
               </div>
               <h2 className="text-lg font-bold text-foreground mb-1">شكرًا جزيلًا!</h2>
               <p className="text-xs text-muted-foreground">
