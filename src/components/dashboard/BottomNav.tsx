@@ -1,12 +1,14 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import {
-  LayoutDashboard, Users, Star, Calendar, Settings, UserCheck,
+  LayoutDashboard, Users, Calendar, BarChart3, Settings, UserCheck, Star,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { title: "الرئيسية", url: "/dashboard", icon: LayoutDashboard },
   { title: "العملاء", url: "/dashboard/clients", icon: Users },
+  { title: "الحجوزات", url: "/dashboard/bookings", icon: Calendar },
+  { title: "التحليلات", url: "/dashboard/analytics", icon: BarChart3 },
   { title: "الاسترجاع", url: "/dashboard/reactivation", icon: UserCheck },
   { title: "التقييمات", url: "/dashboard/reviews", icon: Star },
   { title: "الإعدادات", url: "/dashboard/settings", icon: Settings },
