@@ -88,4 +88,13 @@
     backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.5);
   }
+
+  /* Safe area for native apps */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
 }
