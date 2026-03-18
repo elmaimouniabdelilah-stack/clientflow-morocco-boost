@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   UserCheck, UserX, Send, CheckCircle2, Clock, AlertCircle,
-  TrendingUp, Filter,
+  TrendingUp, Filter, MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -42,6 +42,30 @@ const ReactivationPage = () => {
   const inactiveCount = customers.filter((c) => c.status === "inactive").length;
   const remindedCount = customers.filter((c) => c.status === "reminded").length;
   const reactivatedCount = customers.filter((c) => c.status === "reactivated").length;
+
+  const reactivationMessage = "وحشتينا! ارجع واستمتع بخصم 10% على حجزك القادم 🎁";
+
+  const formatPhone = (phone: string) => {
+    if (phone.startsWith("0")) return "212" + phone.slice(1);
+    return phone;
+  };
+
+  const openWhatsApp = (phone: string) => {
+    const msg = encodeURIComponent(`👋 ${reactivationMessage}`);
+    window.open(`https://wa.me/${formatPhone(phone)}?text=${msg}`, "_blank");
+  };
+
+  const handleBulkWhatsApp = () => {
+    if (selected.length === 0) {
+      toast.error("اختر عميلًا واحدًا على الأقل");
+      return;
+    }
+    const firstCustomer = customers.find((c) => selected.includes(c.id));
+    if (firstCustomer) {
+      openWhatsApp(firstCustomer.phone);
+      toast.info(`تم فتح واتساب للعميل الأول — كرر العملية للبقية (${selected.length} عميل)`);
+    }
+  };
 
   const filteredCustomers = customers.filter((c) => {
     if (filter === "all") return true;
@@ -175,14 +199,23 @@ const ReactivationPage = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
+                className="flex gap-2"
               >
+                <Button
+                  onClick={handleBulkWhatsApp}
+                  className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+                >
+                  <MessageCircle className="ml-2 h-3.5 w-3.5" />
+                  واتساب ({selected.length})
+                </Button>
                 <Button
                   onClick={handleSendReminders}
                   disabled={sending}
-                  className="gradient-primary text-primary-foreground h-9 text-xs"
+                  variant="outline"
+                  className="h-9 text-xs"
                 >
                   <Send className="ml-2 h-3.5 w-3.5" />
-                  {sending ? "جاري الإرسال..." : `إرسال تذكير (${selected.length})`}
+                  {sending ? "جاري الإرسال..." : `تذكير (${selected.length})`}
                 </Button>
               </motion.div>
             )}
@@ -208,6 +241,7 @@ const ReactivationPage = () => {
             <div className="w-24 text-center hidden sm:block">الحجوزات</div>
             <div className="w-28 text-center">مدة الغياب</div>
             <div className="w-28 text-center">الحالة</div>
+            <div className="w-20 text-center">إجراء</div>
           </div>
 
           {/* Rows */}
@@ -240,6 +274,17 @@ const ReactivationPage = () => {
               </div>
               <div className="w-28 flex justify-center">
                 {getStatusBadge(customer.status)}
+              </div>
+              <div className="w-20 flex justify-center">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 text-[#25D366] hover:bg-[#25D366]/10"
+                  onClick={() => openWhatsApp(customer.phone)}
+                  title="إرسال عبر واتساب"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </Button>
               </div>
             </motion.div>
           ))}
