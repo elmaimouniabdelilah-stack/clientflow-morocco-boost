@@ -39,6 +39,12 @@ const SettingsPage = () => {
   const [bizDescription, setBizDescription] = useState("مطعم مغربي عصري يقدم أشهى الأطباق التقليدية والعصرية");
   const [googleUrl, setGoogleUrl] = useState("https://g.page/my-restaurant/review");
 
+  // Reward settings
+  const [rewardEnabled, setRewardEnabled] = useState(true);
+  const [rewardDiscount, setRewardDiscount] = useState("10");
+  const [rewardMessage, setRewardMessage] = useState("على حجزك القادم");
+  const [rewardNote, setRewardNote] = useState("أظهر هذه الشاشة عند زيارتك القادمة");
+
   const [workDays, setWorkDays] = useState<WorkDay[]>([
     { day: "الإثنين", enabled: true, from: "09:00", to: "18:00" },
     { day: "الثلاثاء", enabled: true, from: "09:00", to: "18:00" },
