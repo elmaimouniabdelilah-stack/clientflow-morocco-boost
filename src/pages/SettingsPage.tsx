@@ -65,13 +65,7 @@ const SettingsPage = () => {
     { day: "الأحد", enabled: false, from: "09:00", to: "18:00" },
   ]);
 
-  const [services, setServices] = useState<Service[]>([
-    { id: "1", name: "استشارة", duration: "30", price: "100", enabled: true, iconId: "briefcase", category: "consulting", description: "جلسة استشارية مع متخصص" },
-    { id: "2", name: "حلاقة", duration: "45", price: "80", enabled: true, iconId: "scissors", category: "beauty", description: "حلاقة شعر رجالية" },
-    { id: "3", name: "تنظيف", duration: "60", price: "150", enabled: true, iconId: "sparkles", category: "beauty", description: "تنظيف بشرة عميق" },
-    { id: "4", name: "علاج", duration: "45", price: "200", enabled: true, iconId: "heart", category: "health", description: "جلسة علاج طبيعي" },
-    { id: "5", name: "فحص", duration: "30", price: "120", enabled: true, iconId: "stethoscope", category: "health", description: "فحص طبي شامل" },
-  ]);
+  const [services, setServices] = useState<Service[]>(() => loadServices());
 
   const [iconSearch, setIconSearch] = useState("");
 
