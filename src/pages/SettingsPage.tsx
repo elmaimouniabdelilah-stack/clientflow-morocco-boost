@@ -99,7 +99,7 @@ const SettingsPage = () => {
   };
 
   const updateService = (id: string, field: keyof Service, value: any) => {
-    setServices(services.map((s) => s.id === id ? { ...s, [field]: value } : s));
+    setServices(prev => prev.map((s) => s.id === id ? { ...s, [field]: value } : s));
   };
 
   const addService = () => {
@@ -107,7 +107,7 @@ const SettingsPage = () => {
   };
 
   const removeService = (id: string) => {
-    setServices(services.filter((s) => s.id !== id));
+    setServices(prev => prev.filter((s) => s.id !== id));
   };
 
   const sensors = useSensors(
