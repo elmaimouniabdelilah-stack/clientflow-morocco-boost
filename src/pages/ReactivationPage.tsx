@@ -218,33 +218,34 @@ const ReactivationPage = () => {
               واتساب جماعي ({customers.filter((c) => c.status === "inactive").length})
             </Button>
 
-            {selected.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="flex gap-2"
-              >
-                <Button
-                  onClick={handleBulkWhatsApp}
-                  className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+            <AnimatePresence>
+              {selected.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="flex gap-2"
                 >
-                  <MessageCircle className="ml-2 h-3.5 w-3.5" />
-                  واتساب ({selected.length})
-                </Button>
-                <Button
-                  onClick={handleSendReminders}
-                  disabled={sending}
-                  variant="outline"
-                  className="h-9 text-xs"
-                >
-                  <Send className="ml-2 h-3.5 w-3.5" />
-                  {sending ? "جاري الإرسال..." : `تذكير (${selected.length})`}
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                  <Button
+                    onClick={handleBulkWhatsApp}
+                    className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+                  >
+                    <MessageCircle className="ml-2 h-3.5 w-3.5" />
+                    واتساب ({selected.length})
+                  </Button>
+                  <Button
+                    onClick={handleSendReminders}
+                    disabled={sending}
+                    variant="outline"
+                    className="h-9 text-xs"
+                  >
+                    <Send className="ml-2 h-3.5 w-3.5" />
+                    {sending ? "جاري الإرسال..." : `تذكير (${selected.length})`}
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
         {/* Customer List */}
         <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden">
