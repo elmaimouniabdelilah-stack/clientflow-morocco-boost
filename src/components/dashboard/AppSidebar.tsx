@@ -1,5 +1,5 @@
 import {
-  LayoutDashboard, Users, Star, Calendar, BarChart3, Settings, LogOut,
+  LayoutDashboard, Users, Star, Calendar, BarChart3, Settings, LogOut, UserCheck,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -11,6 +11,7 @@ import {
 const mainItems = [
   { title: "لوحة التحكم", url: "/dashboard", icon: LayoutDashboard },
   { title: "العملاء", url: "/dashboard/clients", icon: Users },
+  { title: "استرجاع العملاء", url: "/dashboard/reactivation", icon: UserCheck },
   { title: "التقييمات", url: "/dashboard/reviews", icon: Star },
   { title: "الحجوزات", url: "/dashboard/bookings", icon: Calendar },
   { title: "التحليلات", url: "/dashboard/analytics", icon: BarChart3 },
