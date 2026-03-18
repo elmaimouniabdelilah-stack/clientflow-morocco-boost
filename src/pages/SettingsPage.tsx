@@ -145,28 +145,38 @@ const SettingsPage = () => {
           </div>
         </div>
 
-        {/* Public Links */}
+        {/* Public Links + QR */}
         <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
           <div className="flex items-center gap-2 mb-5">
             <Globe className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-semibold text-foreground">الروابط العامة</h2>
+            <h2 className="text-lg font-semibold text-foreground">الروابط العامة و QR Code</h2>
           </div>
-          <div className="space-y-3">
-            {[
-              { id: "booking", label: "رابط الحجز", link: bookingLink, color: "text-primary" },
-              { id: "review", label: "رابط التقييم", link: reviewLink, color: "text-secondary" },
-            ].map((l) => (
-              <div key={l.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted">
-                <Link2 className={`h-4 w-4 ${l.color} flex-shrink-0`} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-foreground">{l.label}</p>
-                  <p className="text-[11px] text-muted-foreground truncate" dir="ltr">{l.link}</p>
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              {[
+                { id: "client-flow", label: "رابط Smart QR Flow", link: `${window.location.origin}/client-flow`, color: "text-accent" },
+                { id: "booking", label: "رابط الحجز", link: bookingLink, color: "text-primary" },
+                { id: "review", label: "رابط التقييم", link: reviewLink, color: "text-secondary" },
+              ].map((l) => (
+                <div key={l.id} className="flex items-center gap-3 p-3 rounded-lg bg-muted">
+                  <Link2 className={`h-4 w-4 ${l.color} flex-shrink-0`} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-foreground">{l.label}</p>
+                    <p className="text-[11px] text-muted-foreground truncate" dir="ltr">{l.link}</p>
+                  </div>
+                  <Button variant="outline" size="sm" onClick={() => copyLink(l.link, l.id)}>
+                    {copied === l.id ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  </Button>
                 </div>
-                <Button variant="outline" size="sm" onClick={() => copyLink(l.link, l.id)}>
-                  {copied === l.id ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                </Button>
+              ))}
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <QrCode className="h-4 w-4 text-primary" />
+                <p className="text-sm font-medium text-foreground">Smart QR Code</p>
               </div>
-            ))}
+              <QRGenerator />
+            </div>
           </div>
         </div>
 
