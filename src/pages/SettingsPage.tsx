@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe } from "lucide-react";
+import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
