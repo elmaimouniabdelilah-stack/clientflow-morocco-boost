@@ -27,7 +27,19 @@ interface Service {
   price: string;
   enabled: boolean;
   iconId: string;
+  category: string;
+  description: string;
 }
+
+const serviceCategories = [
+  { id: "beauty", label: "تجميل وعناية" },
+  { id: "health", label: "صحة وطب" },
+  { id: "food", label: "مطاعم ومقاهي" },
+  { id: "consulting", label: "استشارات" },
+  { id: "education", label: "تعليم وتدريب" },
+  { id: "sports", label: "رياضة ولياقة" },
+  { id: "other", label: "أخرى" },
+];
 
 const SettingsPage = () => {
   const [copied, setCopied] = useState<string | null>(null);
@@ -62,11 +74,11 @@ const SettingsPage = () => {
   ]);
 
   const [services, setServices] = useState<Service[]>([
-    { id: "1", name: "استشارة", duration: "30", price: "100", enabled: true, iconId: "briefcase" },
-    { id: "2", name: "حلاقة", duration: "45", price: "80", enabled: true, iconId: "scissors" },
-    { id: "3", name: "تنظيف", duration: "60", price: "150", enabled: true, iconId: "sparkles" },
-    { id: "4", name: "علاج", duration: "45", price: "200", enabled: true, iconId: "heart" },
-    { id: "5", name: "فحص", duration: "30", price: "120", enabled: true, iconId: "stethoscope" },
+    { id: "1", name: "استشارة", duration: "30", price: "100", enabled: true, iconId: "briefcase", category: "consulting", description: "جلسة استشارية مع متخصص" },
+    { id: "2", name: "حلاقة", duration: "45", price: "80", enabled: true, iconId: "scissors", category: "beauty", description: "حلاقة شعر رجالية" },
+    { id: "3", name: "تنظيف", duration: "60", price: "150", enabled: true, iconId: "sparkles", category: "beauty", description: "تنظيف بشرة عميق" },
+    { id: "4", name: "علاج", duration: "45", price: "200", enabled: true, iconId: "heart", category: "health", description: "جلسة علاج طبيعي" },
+    { id: "5", name: "فحص", duration: "30", price: "120", enabled: true, iconId: "stethoscope", category: "health", description: "فحص طبي شامل" },
   ]);
 
   const [iconSearch, setIconSearch] = useState("");
@@ -80,7 +92,7 @@ const SettingsPage = () => {
   };
 
   const addService = () => {
-    setServices([...services, { id: Date.now().toString(), name: "", duration: "30", price: "", enabled: true, iconId: "sparkles" }]);
+    setServices([...services, { id: Date.now().toString(), name: "", duration: "30", price: "", enabled: true, iconId: "sparkles", category: "other", description: "" }]);
   };
 
   const removeService = (id: string) => {
@@ -354,16 +366,16 @@ const SettingsPage = () => {
             </Button>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {services.map((service) => {
               const IconComp = getIconComponent(service.iconId);
               return (
                 <div key={service.id} className={`rounded-xl border p-4 transition-colors ${service.enabled ? "border-border" : "border-border/50 bg-muted/30"}`}>
-                  <div className="flex items-center gap-3">
-                    {/* Icon Picker */}
+                  {/* Row 1: Icon, toggle, name, delete */}
+                  <div className="flex items-center gap-3 mb-3">
                     <Popover>
                       <PopoverTrigger asChild>
-                        <button className="flex-shrink-0 w-11 h-11 rounded-xl gradient-primary flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
+                        <button className="flex-shrink-0 w-11 h-11 rounded-xl bg-primary hover:bg-primary/90 flex items-center justify-center transition-transform hover:scale-105 active:scale-95">
                           <IconComp className="h-5 w-5 text-primary-foreground" />
                         </button>
                       </PopoverTrigger>
@@ -389,7 +401,7 @@ const SettingsPage = () => {
                                 title={item.label}
                                 className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-150 ${
                                   isSelected
-                                    ? "gradient-primary text-primary-foreground shadow-md"
+                                    ? "bg-primary text-primary-foreground shadow-md"
                                     : "hover:bg-muted text-foreground"
                                 }`}
                               >
@@ -410,22 +422,54 @@ const SettingsPage = () => {
                       value={service.name}
                       onChange={(e) => updateService(service.id, "name", e.target.value)}
                       placeholder="اسم الخدمة"
-                      className="flex-1"
+                      className="flex-1 font-medium"
                     />
-
-                    <div className="flex items-center gap-1">
-                      <Input value={service.duration} onChange={(e) => updateService(service.id, "duration", e.target.value)} className="w-16 text-center text-sm" dir="ltr" />
-                      <span className="text-xs text-muted-foreground whitespace-nowrap">دقيقة</span>
-                    </div>
-
-                    <div className="flex items-center gap-1">
-                      <Input value={service.price} onChange={(e) => updateService(service.id, "price", e.target.value)} placeholder="0" className="w-20 text-center text-sm" dir="ltr" />
-                      <span className="text-xs text-muted-foreground">درهم</span>
-                    </div>
 
                     <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive flex-shrink-0" onClick={() => removeService(service.id)}>
                       <Trash2 className="h-3.5 w-3.5" />
                     </Button>
+                  </div>
+
+                  {/* Row 2: Category, Duration, Price */}
+                  <div className="grid grid-cols-3 gap-3 mb-3">
+                    <div>
+                      <Label className="text-[11px] text-muted-foreground">نوع الخدمة</Label>
+                      <Select value={service.category} onValueChange={(v) => updateService(service.id, "category", v)}>
+                        <SelectTrigger className="h-9 text-xs">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {serviceCategories.map((cat) => (
+                            <SelectItem key={cat.id} value={cat.id}>{cat.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label className="text-[11px] text-muted-foreground">المدة</Label>
+                      <div className="flex items-center gap-1">
+                        <Input value={service.duration} onChange={(e) => updateService(service.id, "duration", e.target.value)} className="h-9 text-center text-sm" dir="ltr" />
+                        <span className="text-[10px] text-muted-foreground whitespace-nowrap">دقيقة</span>
+                      </div>
+                    </div>
+                    <div>
+                      <Label className="text-[11px] text-muted-foreground">السعر</Label>
+                      <div className="flex items-center gap-1">
+                        <Input value={service.price} onChange={(e) => updateService(service.id, "price", e.target.value)} placeholder="0" className="h-9 text-center text-sm" dir="ltr" />
+                        <span className="text-[10px] text-muted-foreground">درهم</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Row 3: Description */}
+                  <div>
+                    <Label className="text-[11px] text-muted-foreground">وصف الخدمة (اختياري)</Label>
+                    <Input
+                      value={service.description}
+                      onChange={(e) => updateService(service.id, "description", e.target.value)}
+                      placeholder="وصف مختصر للخدمة يظهر للعميل..."
+                      className="h-9 text-sm"
+                    />
                   </div>
                 </div>
               );
@@ -434,7 +478,7 @@ const SettingsPage = () => {
         </div>
 
         <div className="flex justify-end pb-8">
-          <Button onClick={handleSave} className="gradient-primary text-primary-foreground px-8">
+          <Button onClick={handleSave} className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
             <Save className="ml-2 h-4 w-4" />
             حفظ جميع التغييرات
           </Button>
