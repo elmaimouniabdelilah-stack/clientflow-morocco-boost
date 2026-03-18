@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   UserCheck, UserX, Send, CheckCircle2, Clock, AlertCircle,
-  TrendingUp, Filter, MessageCircle,
+  TrendingUp, Filter, MessageCircle, Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
