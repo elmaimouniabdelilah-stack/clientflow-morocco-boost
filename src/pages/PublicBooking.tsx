@@ -235,7 +235,7 @@ const PublicBooking = () => {
               {/* Summary */}
               <div className="rounded-lg bg-muted p-3 mb-5 text-sm space-y-1">
                 <p className="text-muted-foreground">
-                  <span className="font-medium text-foreground">{services.find(s => s.id === selectedService)?.icon} {services.find(s => s.id === selectedService)?.name}</span>
+                  <span className="font-medium text-foreground">{services.find(s => s.id === selectedService)?.name}</span>
                 </p>
                 <p className="text-muted-foreground">
                   📅 {selectedDate && format(selectedDate, "EEEE d MMMM", { locale: ar })} — <span dir="ltr">🕐 {selectedTime}</span>
