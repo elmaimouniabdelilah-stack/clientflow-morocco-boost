@@ -13,23 +13,23 @@ const Login = () => {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Link to="/" className="text-2xl font-bold font-display gradient-text">ClientFlow</Link>
-          <p className="text-sm text-muted-foreground mt-2">Welcome back</p>
+          <p className="text-sm text-muted-foreground mt-2">مرحبًا بعودتك</p>
         </div>
         <form onSubmit={(e) => e.preventDefault()} className="space-y-4">
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
+            <Label htmlFor="email">البريد الإلكتروني</Label>
+            <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" dir="ltr" />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
+            <Label htmlFor="password">كلمة المرور</Label>
+            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" dir="ltr" />
           </div>
           <Button className="w-full gradient-primary text-primary-foreground" asChild>
-            <Link to="/dashboard">Log In</Link>
+            <Link to="/dashboard">تسجيل الدخول</Link>
           </Button>
         </form>
         <p className="text-xs text-center text-muted-foreground mt-6">
-          Don't have an account? <Link to="/signup" className="text-primary font-medium">Sign up</Link>
+          ليس لديك حساب؟ <Link to="/signup" className="text-primary font-medium">سجّل الآن</Link>
         </p>
       </div>
     </div>
