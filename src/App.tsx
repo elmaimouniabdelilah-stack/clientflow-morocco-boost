@@ -15,6 +15,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import BookingsPage from "./pages/BookingsPage";
 import PublicBooking from "./pages/PublicBooking";
 import SettingsPage from "./pages/SettingsPage";
+import ReactivationPage from "./pages/ReactivationPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
