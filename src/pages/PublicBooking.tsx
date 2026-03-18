@@ -2,6 +2,7 @@ import { useState } from "react";
 import { format, addDays, isBefore, startOfDay, isToday } from "date-fns";
 import { ar } from "date-fns/locale";
 import { CalendarIcon, Clock, CheckCircle2, User, Phone, ChevronLeft, ChevronRight } from "lucide-react";
+import { getIconComponent } from "@/lib/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
