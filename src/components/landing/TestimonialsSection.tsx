@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 import owner1 from "@/assets/testimonial-owner1.jpg";
 import owner2 from "@/assets/testimonial-owner2.jpg";
 import owner3 from "@/assets/testimonial-owner3.jpg";
@@ -29,17 +29,20 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => (
-  <section className="py-20 bg-background">
+  <section className="py-24 bg-background">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-14"
+        className="text-center mb-16"
       >
-        <p className="text-sm font-semibold text-primary mb-2">آراء عملائنا</p>
-        <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-          ماذا يقول عملاؤنا؟
+        <div className="inline-flex items-center gap-2 bg-star/10 border border-star/20 rounded-full px-4 py-1.5 text-sm text-star font-medium mb-4">
+          <Star className="h-3.5 w-3.5 fill-current" />
+          آراء عملائنا
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">
+          ماذا يقول <span className="gradient-text">عملاؤنا</span>؟
         </h2>
       </motion.div>
 
@@ -51,18 +54,19 @@ const TestimonialsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="rounded-2xl border border-border bg-card p-6 hover:shadow-[var(--shadow-elevated)] transition-shadow"
+            className="relative rounded-2xl bg-card border border-border/60 p-6 hover:shadow-[var(--shadow-elevated)] hover:-translate-y-1 transition-all duration-300"
           >
+            <Quote className="h-8 w-8 text-primary/10 absolute top-4 left-4" />
             <div className="flex gap-0.5 mb-4">
               {Array.from({ length: t.rating }).map((_, j) => (
-                <Star key={j} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                <Star key={j} className="h-4 w-4 fill-star text-star" />
               ))}
             </div>
-            <p className="text-sm text-foreground leading-relaxed mb-5">"{t.text}"</p>
-            <div className="flex items-center gap-3 pt-4 border-t border-border">
-              <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
+            <p className="text-sm text-foreground leading-relaxed mb-6 relative z-10">"{t.text}"</p>
+            <div className="flex items-center gap-3 pt-4 border-t border-border/60">
+              <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-primary/10" />
               <div>
-                <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                <p className="text-sm font-bold text-foreground">{t.name}</p>
                 <p className="text-xs text-muted-foreground">{t.role}</p>
               </div>
             </div>

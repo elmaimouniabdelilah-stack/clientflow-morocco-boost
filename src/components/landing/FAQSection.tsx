@@ -30,16 +30,19 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <section id="faq" className="py-20 bg-background">
+  <section id="faq" className="py-24 bg-card">
     <div className="container mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-14"
+        className="text-center mb-16"
       >
-        <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+        <div className="inline-flex items-center gap-2 bg-primary/8 border border-primary/15 rounded-full px-4 py-1.5 text-sm text-primary font-medium mb-4">
           الأسئلة الشائعة
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">
+          أسئلة <span className="gradient-text">متكررة</span>
         </h2>
       </motion.div>
 
@@ -54,12 +57,12 @@ const FAQSection = () => (
             <AccordionItem
               key={i}
               value={`faq-${i}`}
-              className="border border-border rounded-xl px-5 data-[state=open]:bg-muted/30"
+              className="border border-border/60 rounded-xl px-5 bg-background data-[state=open]:shadow-sm data-[state=open]:border-primary/20 transition-all"
             >
-              <AccordionTrigger className="text-sm font-semibold text-foreground hover:no-underline py-4">
+              <AccordionTrigger className="text-sm font-bold text-foreground hover:no-underline py-4">
                 {faq.q}
               </AccordionTrigger>
-              <AccordionContent className="text-sm text-muted-foreground pb-4">
+              <AccordionContent className="text-sm text-muted-foreground pb-4 leading-relaxed">
                 {faq.a}
               </AccordionContent>
             </AccordionItem>
