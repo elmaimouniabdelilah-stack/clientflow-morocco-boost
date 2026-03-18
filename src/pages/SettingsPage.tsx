@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe, QrCode, Gift } from "lucide-react";
+import { Save, Building2, Clock, Wrench, Plus, Trash2, Link2, Copy, Check, Globe, QrCode, Gift, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { iconLibrary, getIconComponent } from "@/lib/icons";
@@ -44,6 +45,11 @@ const SettingsPage = () => {
   const [rewardDiscount, setRewardDiscount] = useState("10");
   const [rewardMessage, setRewardMessage] = useState("على حجزك القادم");
   const [rewardNote, setRewardNote] = useState("أظهر هذه الشاشة عند زيارتك القادمة");
+
+  // Reactivation settings
+  const [reactivationMessage, setReactivationMessage] = useState("وحشتينا! ارجع واستمتع بخصم {discount} على حجزك القادم 🎁");
+  const [reactivationDiscount, setReactivationDiscount] = useState("10");
+  const [inactivityDays, setInactivityDays] = useState("15");
 
   const [workDays, setWorkDays] = useState<WorkDay[]>([
     { day: "الإثنين", enabled: true, from: "09:00", to: "18:00" },
@@ -248,6 +254,66 @@ const SettingsPage = () => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Reactivation Settings */}
+        <div className="rounded-xl border border-border bg-card p-6 shadow-[var(--shadow-card)]">
+          <div className="flex items-center gap-2 mb-5">
+            <UserCheck className="h-5 w-5 text-primary" />
+            <h2 className="text-lg font-semibold text-foreground">إعدادات استرجاع العملاء</h2>
+          </div>
+
+          <div className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <Label>نسبة خصم الاسترجاع (%)</Label>
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={reactivationDiscount}
+                    onChange={(e) => setReactivationDiscount(e.target.value)}
+                    className="w-24 text-center text-lg font-bold"
+                    dir="ltr"
+                  />
+                  <span className="text-sm text-muted-foreground">%</span>
+                </div>
+              </div>
+              <div>
+                <Label>مدة عدم النشاط (أيام)</Label>
+                <Select value={inactivityDays} onValueChange={setInactivityDays}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="7">7 أيام</SelectItem>
+                    <SelectItem value="15">15 يوم</SelectItem>
+                    <SelectItem value="30">30 يوم</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div>
+              <Label>رسالة التذكير</Label>
+              <Textarea
+                value={reactivationMessage}
+                onChange={(e) => setReactivationMessage(e.target.value)}
+                placeholder="اكتب رسالة التذكير... استخدم {discount} لإدراج نسبة الخصم"
+                rows={3}
+              />
+              <p className="text-[10px] text-muted-foreground mt-1">استخدم <code className="bg-muted px-1 rounded">{"{discount}"}</code> لإدراج نسبة الخصم تلقائيًا</p>
+            </div>
+
+            {/* Preview */}
+            <div className="rounded-xl border border-dashed border-primary/20 bg-primary/5 p-4 text-center">
+              <p className="text-[10px] text-muted-foreground mb-2">معاينة الرسالة</p>
+              <p className="text-sm text-foreground">
+                👋 {reactivationMessage.replace("{discount}", `${reactivationDiscount}%`)}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Work Hours */}
