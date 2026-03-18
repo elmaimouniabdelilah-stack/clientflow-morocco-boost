@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { toast } from "sonner";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import { iconLibrary, getIconComponent } from "@/lib/icons";
+import QRGenerator from "@/components/dashboard/QRGenerator";
 
 
 interface WorkDay {
