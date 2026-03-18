@@ -84,7 +84,8 @@ const PricingSection = () => (
               ))}
             </ul>
             <Button
-              className={`w-full rounded-xl h-11 font-semibold ${
+              size="lg"
+              className={`w-full rounded-full h-14 text-base font-semibold ${
                 plan.featured
                   ? "gradient-primary text-white shadow-md"
                   : "bg-muted hover:bg-muted/80 text-foreground"
