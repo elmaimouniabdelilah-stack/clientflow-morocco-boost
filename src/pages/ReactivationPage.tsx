@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   UserCheck, UserX, Send, CheckCircle2, Clock, AlertCircle,
-  TrendingUp, Filter, MessageCircle,
+  TrendingUp, Filter, MessageCircle, Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -55,15 +55,31 @@ const ReactivationPage = () => {
     window.open(`https://wa.me/${formatPhone(phone)}?text=${msg}`, "_blank");
   };
 
-  const handleBulkWhatsApp = () => {
+  const handleBulkWhatsApp = async () => {
     if (selected.length === 0) {
       toast.error("اختر عميلًا واحدًا على الأقل");
       return;
     }
-    const firstCustomer = customers.find((c) => selected.includes(c.id));
-    if (firstCustomer) {
-      openWhatsApp(firstCustomer.phone);
-      toast.info(`تم فتح واتساب للعميل الأول — كرر العملية للبقية (${selected.length} عميل)`);
+    const selectedCustomers = customers.filter((c) => selected.includes(c.id));
+    toast.info(`جاري فتح واتساب لـ ${selectedCustomers.length} عميل...`);
+    for (let i = 0; i < selectedCustomers.length; i++) {
+      setTimeout(() => {
+        openWhatsApp(selectedCustomers[i].phone);
+      }, i * 1500);
+    }
+  };
+
+  const handleSendToAll = async () => {
+    const inactiveCustomers = customers.filter((c) => c.status === "inactive");
+    if (inactiveCustomers.length === 0) {
+      toast.error("لا يوجد عملاء غير نشطين");
+      return;
+    }
+    toast.info(`جاري فتح واتساب لـ ${inactiveCustomers.length} عميل غير نشط...`);
+    for (let i = 0; i < inactiveCustomers.length; i++) {
+      setTimeout(() => {
+        openWhatsApp(inactiveCustomers[i].phone);
+      }, i * 1500);
     }
   };
 
@@ -193,36 +209,44 @@ const ReactivationPage = () => {
             </Select>
           </div>
 
-          <AnimatePresence>
-            {selected.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="flex gap-2"
-              >
-                <Button
-                  onClick={handleBulkWhatsApp}
-                  className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
-                >
-                  <MessageCircle className="ml-2 h-3.5 w-3.5" />
-                  واتساب ({selected.length})
-                </Button>
-                <Button
-                  onClick={handleSendReminders}
-                  disabled={sending}
-                  variant="outline"
-                  className="h-9 text-xs"
-                >
-                  <Send className="ml-2 h-3.5 w-3.5" />
-                  {sending ? "جاري الإرسال..." : `تذكير (${selected.length})`}
-                </Button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+          <div className="flex gap-2 items-center">
+            <Button
+              onClick={handleSendToAll}
+              className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+            >
+              <Users className="ml-2 h-3.5 w-3.5" />
+              واتساب جماعي ({customers.filter((c) => c.status === "inactive").length})
+            </Button>
 
-        {/* Customer List */}
+            <AnimatePresence>
+              {selected.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="flex gap-2"
+                >
+                  <Button
+                    onClick={handleBulkWhatsApp}
+                    className="bg-[#25D366] hover:bg-[#1fb855] text-white h-9 text-xs"
+                  >
+                    <MessageCircle className="ml-2 h-3.5 w-3.5" />
+                    واتساب ({selected.length})
+                  </Button>
+                  <Button
+                    onClick={handleSendReminders}
+                    disabled={sending}
+                    variant="outline"
+                    className="h-9 text-xs"
+                  >
+                    <Send className="ml-2 h-3.5 w-3.5" />
+                    {sending ? "جاري الإرسال..." : `تذكير (${selected.length})`}
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
         <div className="rounded-xl border border-border bg-card shadow-[var(--shadow-card)] overflow-hidden">
           {/* Table Header */}
           <div className="flex items-center gap-3 p-3 border-b border-border bg-muted/50 text-[11px] font-medium text-muted-foreground">
