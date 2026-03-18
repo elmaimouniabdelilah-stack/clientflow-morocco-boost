@@ -45,6 +45,11 @@ const SettingsPage = () => {
   const [rewardMessage, setRewardMessage] = useState("على حجزك القادم");
   const [rewardNote, setRewardNote] = useState("أظهر هذه الشاشة عند زيارتك القادمة");
 
+  // Reactivation settings
+  const [reactivationMessage, setReactivationMessage] = useState("وحشتينا! ارجع واستمتع بخصم {discount} على حجزك القادم 🎁");
+  const [reactivationDiscount, setReactivationDiscount] = useState("10");
+  const [inactivityDays, setInactivityDays] = useState("15");
+
   const [workDays, setWorkDays] = useState<WorkDay[]>([
     { day: "الإثنين", enabled: true, from: "09:00", to: "18:00" },
     { day: "الثلاثاء", enabled: true, from: "09:00", to: "18:00" },
