@@ -43,6 +43,30 @@ const ReactivationPage = () => {
   const remindedCount = customers.filter((c) => c.status === "reminded").length;
   const reactivatedCount = customers.filter((c) => c.status === "reactivated").length;
 
+  const reactivationMessage = "وحشتينا! ارجع واستمتع بخصم 10% على حجزك القادم 🎁";
+
+  const formatPhone = (phone: string) => {
+    if (phone.startsWith("0")) return "212" + phone.slice(1);
+    return phone;
+  };
+
+  const openWhatsApp = (phone: string) => {
+    const msg = encodeURIComponent(`👋 ${reactivationMessage}`);
+    window.open(`https://wa.me/${formatPhone(phone)}?text=${msg}`, "_blank");
+  };
+
+  const handleBulkWhatsApp = () => {
+    if (selected.length === 0) {
+      toast.error("اختر عميلًا واحدًا على الأقل");
+      return;
+    }
+    const firstCustomer = customers.find((c) => selected.includes(c.id));
+    if (firstCustomer) {
+      openWhatsApp(firstCustomer.phone);
+      toast.info(`تم فتح واتساب للعميل الأول — كرر العملية للبقية (${selected.length} عميل)`);
+    }
+  };
+
   const filteredCustomers = customers.filter((c) => {
     if (filter === "all") return true;
     if (filter === "7") return c.daysSince >= 7 && c.daysSince < 15;
