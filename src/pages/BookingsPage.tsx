@@ -2,6 +2,7 @@ import { useState } from "react";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isSameMonth, addMonths, subMonths, isToday, startOfWeek, endOfWeek } from "date-fns";
 import { ar } from "date-fns/locale";
 import { Calendar as CalendarIcon, Plus, Clock, User, Phone, ChevronRight, ChevronLeft, X, Check, CheckCircle2, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,17 +35,23 @@ const initialBookings: Booking[] = [
   { id: "2", clientName: "فاطمة الزهراء", clientPhone: "0698765432", date: new Date(), time: "14:30", service: "علاج", status: "confirmed", notes: "الجلسة الثالثة" },
   { id: "3", clientName: "سارة الإدريسي", clientPhone: "0677889900", date: new Date(), time: "16:00", service: "فحص", status: "pending", notes: "" },
   { id: "4", clientName: "كريم العلوي", clientPhone: "0633221100", date: addMonths(new Date(), 0), time: "11:00", service: "حلاقة", status: "confirmed", notes: "" },
+  { id: "5", clientName: "يوسف بنعلي", clientPhone: "0655443322", date: new Date(Date.now() + 86400000), time: "09:30", service: "استشارة", status: "pending", notes: "عميل جديد" },
 ];
 
-// Add a booking for tomorrow
-initialBookings.push(
-  { id: "5", clientName: "يوسف بنعلي", clientPhone: "0655443322", date: new Date(Date.now() + 86400000), time: "09:30", service: "استشارة", status: "pending", notes: "عميل جديد" }
-);
-
 const statusConfig = {
-  confirmed: { label: "مؤكد", icon: CheckCircle2, className: "text-accent bg-accent/10" },
-  pending: { label: "في الانتظار", icon: AlertCircle, className: "text-primary bg-primary/10" },
-  cancelled: { label: "ملغي", icon: X, className: "text-destructive bg-destructive/10" },
+  confirmed: { label: "مؤكد", icon: CheckCircle2, className: "text-accent bg-accent/10 border-accent/20" },
+  pending: { label: "في الانتظار", icon: AlertCircle, className: "text-primary bg-primary/10 border-primary/20" },
+  cancelled: { label: "ملغي", icon: X, className: "text-destructive bg-destructive/10 border-destructive/20" },
+};
+
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.06 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } },
 };
 
 const BookingsPage = () => {
@@ -56,7 +63,7 @@ const BookingsPage = () => {
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
-  const calStart = startOfWeek(monthStart, { weekStartsOn: 6 }); // Saturday start
+  const calStart = startOfWeek(monthStart, { weekStartsOn: 6 });
   const calEnd = endOfWeek(monthEnd, { weekStartsOn: 6 });
   const calDays = eachDayOfInterval({ start: calStart, end: calEnd });
 
@@ -99,35 +106,44 @@ const BookingsPage = () => {
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center justify-between mb-6"
+        >
           <div>
-            <h1 className="text-2xl font-bold text-foreground">الحجوزات</h1>
-            <p className="text-sm text-muted-foreground mt-1">إدارة المواعيد والحجوزات</p>
+            <h1 className="text-xl md:text-2xl font-bold text-foreground">الحجوزات</h1>
+            <p className="text-sm text-muted-foreground mt-0.5">إدارة المواعيد والحجوزات</p>
           </div>
-          <Button onClick={openNewBooking} className="gradient-primary text-primary-foreground">
+          <Button onClick={openNewBooking} className="gradient-primary text-primary-foreground shadow-md active:scale-95 transition-transform">
             <Plus className="ml-2 h-4 w-4" />
             حجز جديد
           </Button>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-[340px_1fr] gap-6">
           {/* Calendar */}
-          <div className="rounded-xl border border-border bg-card p-5 shadow-[var(--shadow-card)] h-fit">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="rounded-2xl border border-border/50 bg-card p-5 shadow-[var(--shadow-card)] h-fit"
+          >
             <div className="flex items-center justify-between mb-4">
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
+              <Button variant="ghost" size="icon" className="h-8 w-8 rounded-xl" onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
                 <ChevronRight className="h-4 w-4" />
               </Button>
-              <h3 className="text-sm font-semibold text-foreground">
+              <h3 className="text-sm font-bold text-foreground">
                 {format(currentMonth, "MMMM yyyy", { locale: ar })}
               </h3>
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>
+              <Button variant="ghost" size="icon" className="h-8 w-8 rounded-xl" onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}>
                 <ChevronLeft className="h-4 w-4" />
               </Button>
             </div>
 
             <div className="grid grid-cols-7 gap-1 mb-1">
               {weekDays.map((d, i) => (
-                <div key={i} className="text-center text-[10px] font-medium text-muted-foreground py-1">{d}</div>
+                <div key={i} className="text-center text-[10px] font-semibold text-muted-foreground py-1">{d}</div>
               ))}
             </div>
 
@@ -142,18 +158,18 @@ const BookingsPage = () => {
                   <button
                     key={day.toISOString()}
                     onClick={() => setSelectedDate(day)}
-                    className={`relative h-10 rounded-lg text-sm font-medium transition-all duration-150
+                    className={`relative h-10 rounded-xl text-sm font-medium transition-all duration-200 active:scale-90
                       ${!inMonth ? "text-muted-foreground/30" : "text-foreground"}
-                      ${selected ? "gradient-primary text-primary-foreground shadow-md" : "hover:bg-muted"}
-                      ${today && !selected ? "ring-1 ring-primary" : ""}
+                      ${selected ? "gradient-primary text-primary-foreground shadow-md" : "hover:bg-muted/80"}
+                      ${today && !selected ? "ring-2 ring-primary/40" : ""}
                     `}
                   >
                     {format(day, "d")}
                     {count > 0 && !selected && (
-                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary" />
                     )}
                     {count > 0 && selected && (
-                      <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-foreground" />
+                      <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-primary-foreground/80" />
                     )}
                   </button>
                 );
@@ -161,97 +177,110 @@ const BookingsPage = () => {
             </div>
 
             {/* Stats */}
-            <div className="mt-5 pt-4 border-t border-border grid grid-cols-3 gap-2 text-center">
-              <div>
-                <p className="text-lg font-bold text-foreground">{bookings.filter(b => b.status === "confirmed").length}</p>
-                <p className="text-[10px] text-muted-foreground">مؤكد</p>
-              </div>
-              <div>
-                <p className="text-lg font-bold text-foreground">{bookings.filter(b => b.status === "pending").length}</p>
-                <p className="text-[10px] text-muted-foreground">في الانتظار</p>
-              </div>
-              <div>
-                <p className="text-lg font-bold text-foreground">{bookings.filter(b => b.status === "cancelled").length}</p>
-                <p className="text-[10px] text-muted-foreground">ملغي</p>
-              </div>
+            <div className="mt-5 pt-4 border-t border-border/50 grid grid-cols-3 gap-2 text-center">
+              {[
+                { value: bookings.filter(b => b.status === "confirmed").length, label: "مؤكد", color: "text-accent" },
+                { value: bookings.filter(b => b.status === "pending").length, label: "في الانتظار", color: "text-primary" },
+                { value: bookings.filter(b => b.status === "cancelled").length, label: "ملغي", color: "text-destructive" },
+              ].map((s) => (
+                <div key={s.label} className="rounded-xl bg-muted/50 py-2">
+                  <p className={`text-lg font-black ${s.color}`}>{s.value}</p>
+                  <p className="text-[10px] text-muted-foreground">{s.label}</p>
+                </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Day Bookings */}
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-foreground">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.15 }}
+              className="flex items-center justify-between"
+            >
+              <h2 className="text-base md:text-lg font-bold text-foreground">
                 {format(selectedDate, "EEEE d MMMM", { locale: ar })}
               </h2>
-              <span className="text-xs text-muted-foreground">{dayBookings.length} حجز</span>
-            </div>
+              <span className="text-xs text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-lg">{dayBookings.length} حجز</span>
+            </motion.div>
 
             {dayBookings.length === 0 ? (
-              <div className="rounded-xl border border-border bg-card p-12 text-center">
-                <CalendarIcon className="h-10 w-10 text-muted-foreground/30 mx-auto mb-3" />
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="rounded-2xl border border-border/50 bg-card p-12 text-center"
+              >
+                <CalendarIcon className="h-10 w-10 text-muted-foreground/20 mx-auto mb-3" />
                 <p className="text-sm text-muted-foreground">لا توجد حجوزات لهذا اليوم</p>
-                <Button variant="outline" size="sm" className="mt-3" onClick={openNewBooking}>
+                <Button variant="outline" size="sm" className="mt-3 rounded-xl" onClick={openNewBooking}>
                   <Plus className="ml-1 h-3.5 w-3.5" />
                   إضافة حجز
                 </Button>
-              </div>
+              </motion.div>
             ) : (
-              dayBookings.map((booking) => {
-                const sc = statusConfig[booking.status];
-                const StatusIcon = sc.icon;
+              <motion.div variants={container} initial="hidden" animate="show" className="space-y-3">
+                {dayBookings.map((booking) => {
+                  const sc = statusConfig[booking.status];
+                  const StatusIcon = sc.icon;
 
-                return (
-                  <div key={booking.id} className="rounded-xl border border-border bg-card p-5 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-elevated)]">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="flex items-center gap-1.5 text-sm font-bold text-foreground">
-                            <Clock className="h-4 w-4 text-primary" />
-                            <span dir="ltr">{booking.time}</span>
+                  return (
+                    <motion.div
+                      key={booking.id}
+                      variants={item}
+                      className="rounded-2xl border border-border/50 bg-card p-4 md:p-5 shadow-[var(--shadow-card)] transition-all duration-200 hover:shadow-[var(--shadow-elevated)] active:scale-[0.99]"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className="flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-lg">
+                              <Clock className="h-3.5 w-3.5 text-primary" />
+                              <span className="text-sm font-bold text-primary" dir="ltr">{booking.time}</span>
+                            </div>
+                            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold border ${sc.className}`}>
+                              <StatusIcon className="h-3 w-3" />
+                              {sc.label}
+                            </span>
                           </div>
-                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium ${sc.className}`}>
-                            <StatusIcon className="h-3 w-3" />
-                            {sc.label}
-                          </span>
+
+                          <div className="space-y-1.5 text-sm text-muted-foreground">
+                            <p className="flex items-center gap-2">
+                              <User className="h-3.5 w-3.5 shrink-0" />
+                              <span className="text-foreground font-semibold">{booking.clientName}</span>
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <Phone className="h-3.5 w-3.5 shrink-0" />
+                              <span dir="ltr">{booking.clientPhone}</span>
+                            </p>
+                            <p className="flex items-center gap-2">
+                              <CalendarIcon className="h-3.5 w-3.5 shrink-0" />
+                              {booking.service}
+                            </p>
+                            {booking.notes && (
+                              <p className="text-xs text-muted-foreground mt-2 bg-muted/60 px-3 py-1.5 rounded-lg">
+                                {booking.notes}
+                              </p>
+                            )}
+                          </div>
                         </div>
 
-                        <div className="space-y-1 text-sm text-muted-foreground">
-                          <p className="flex items-center gap-1.5">
-                            <User className="h-3.5 w-3.5" />
-                            <span className="text-foreground font-medium">{booking.clientName}</span>
-                          </p>
-                          <p className="flex items-center gap-1.5">
-                            <Phone className="h-3.5 w-3.5" />
-                            <span dir="ltr">{booking.clientPhone}</span>
-                          </p>
-                          <p className="flex items-center gap-1.5">
-                            <CalendarIcon className="h-3.5 w-3.5" />
-                            {booking.service}
-                          </p>
-                          {booking.notes && (
-                            <p className="text-xs text-muted-foreground mt-1 bg-muted px-2 py-1 rounded">
-                              {booking.notes}
-                            </p>
+                        <div className="flex gap-1 flex-shrink-0">
+                          {booking.status === "pending" && (
+                            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-xl text-accent hover:text-accent hover:bg-accent/10" onClick={() => updateStatus(booking.id, "confirmed")}>
+                              <Check className="h-4 w-4" />
+                            </Button>
+                          )}
+                          {booking.status !== "cancelled" && (
+                            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10" onClick={() => updateStatus(booking.id, "cancelled")}>
+                              <X className="h-4 w-4" />
+                            </Button>
                           )}
                         </div>
                       </div>
-
-                      <div className="flex gap-1 flex-shrink-0">
-                        {booking.status === "pending" && (
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-accent hover:text-accent" onClick={() => updateStatus(booking.id, "confirmed")}>
-                            <Check className="h-4 w-4" />
-                          </Button>
-                        )}
-                        {booking.status !== "cancelled" && (
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive" onClick={() => updateStatus(booking.id, "cancelled")}>
-                            <X className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
             )}
           </div>
         </div>
