@@ -9,7 +9,7 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => (
   <SidebarProvider>
-    <div className="min-h-screen flex w-full">
+    <div className="min-h-screen flex w-full overflow-x-hidden">
       <div className="hidden md:block">
         <AppSidebar />
       </div>

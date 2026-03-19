@@ -147,7 +147,7 @@ const SettingsPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="max-w-3xl mx-auto space-y-8">
+      <div className="max-w-3xl mx-auto space-y-8 overflow-x-hidden">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-foreground">الإعدادات</h1>
@@ -364,14 +364,14 @@ const SettingsPage = () => {
           </div>
           <div className="space-y-3">
             {workDays.map((wd, i) => (
-              <div key={wd.day} className="flex items-center gap-3">
+              <div key={wd.day} className="flex flex-wrap items-center gap-2 sm:gap-3">
                 <Switch checked={wd.enabled} onCheckedChange={(v) => updateWorkDay(i, "enabled", v)} />
-                <span className={`w-20 text-sm font-medium ${wd.enabled ? "text-foreground" : "text-muted-foreground"}`}>{wd.day}</span>
+                <span className={`w-16 sm:w-20 text-sm font-medium ${wd.enabled ? "text-foreground" : "text-muted-foreground"}`}>{wd.day}</span>
                 {wd.enabled ? (
-                  <div className="flex items-center gap-2 flex-1">
-                    <Input type="time" value={wd.from} onChange={(e) => updateWorkDay(i, "from", e.target.value)} className="w-28 text-center text-sm" dir="ltr" />
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <Input type="time" value={wd.from} onChange={(e) => updateWorkDay(i, "from", e.target.value)} className="flex-1 min-w-0 text-center text-sm" dir="ltr" />
                     <span className="text-muted-foreground text-sm">—</span>
-                    <Input type="time" value={wd.to} onChange={(e) => updateWorkDay(i, "to", e.target.value)} className="w-28 text-center text-sm" dir="ltr" />
+                    <Input type="time" value={wd.to} onChange={(e) => updateWorkDay(i, "to", e.target.value)} className="flex-1 min-w-0 text-center text-sm" dir="ltr" />
                   </div>
                 ) : (
                   <span className="text-sm text-muted-foreground">مغلق</span>
